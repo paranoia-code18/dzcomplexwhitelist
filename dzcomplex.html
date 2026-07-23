@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dz Complex RP — مقابلة الانضمام</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+  --bg-deep:#060f1f;
+  --bg-panel:#0c1c37;
+  --bg-panel-2:#11284d;
+  --bg-panel-3:#16305c;
+  --accent:#2f6fed;
+  --accent-2:#57c7ff;
+  --success:#2fd499;
+  --danger:#ff5470;
+  --warning:#ffb648;
+  --text:#eaf2ff;
+  --text-muted:#8fa6c9;
+  --border:rgba(87,199,255,0.16);
+  --font-display:'Cairo',sans-serif;
+  --font-body:'Cairo',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(47,111,237,0.25), transparent 60%),
+    radial-gradient(1000px 500px at 100% 10%, rgba(87,199,255,0.12), transparent 55%),
+    var(--bg-deep);
+  color:var(--text);
+  font-family:var(--font-body);
+  min-height:100vh;
+  line-height:1.6;
+}
+[dir="ltr"] body, .ltr{direction:ltr;}
+#app{min-height:100vh;display:flex;flex-direction:column;}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 28px;border-bottom:1px solid var(--border);
+  background:rgba(6,15,31,0.6);backdrop-filter:blur(6px);
+  position:sticky;top:0;z-index:50;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand .crest{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(145deg,var(--accent),var(--accent-2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-weight:700;color:#04101f;font-size:15px;
+  box-shadow:0 0 22px rgba(87,199,255,0.45);
+  flex-shrink:0;
+}
+.brand-text b{font-size:17px;letter-spacing:0.5px;font-weight:800;}
+.brand-text span{display:block;font-size:11px;color:var(--text-muted);font-family:var(--font-mono);letter-spacing:1.5px;text-transform:uppercase;}
+.top-actions{display:flex;align-items:center;gap:10px;}
+.lang-switch{display:flex;background:var(--bg-panel);border:1px solid var(--border);border-radius:999px;padding:3px;gap:2px;}
+.lang-btn{
+  border:none;background:transparent;color:var(--text-muted);font-family:var(--font-mono);
+  font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;cursor:pointer;transition:.2s;
+}
+.lang-btn.active{background:var(--accent);color:#04101f;}
+.icon-btn{
+  width:38px;height:38px;border-radius:10px;border:1px solid var(--border);
+  background:var(--bg-panel);color:var(--text-muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:16px;transition:.2s;
+}
+.icon-btn:hover{color:var(--accent-2);border-color:var(--accent-2);}
+
+/* ===== MAIN ===== */
+main{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 20px 80px;}
+.screen{width:100%;max-width:760px;animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* ===== STEPPER (signature element) ===== */
+.stepper{display:flex;align-items:center;justify-content:center;gap:0;margin:0 auto 36px;max-width:620px;}
+.step{display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;position:relative;}
+.step .node{
+  width:34px;height:34px;border-radius:50%;border:2px solid var(--border);
+  background:var(--bg-panel);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--text-muted);
+  transition:.3s;z-index:2;
+}
+.step .label{font-size:11px;color:var(--text-muted);font-weight:700;white-space:nowrap;}
+.step.active .node{border-color:var(--accent-2);color:var(--accent-2);box-shadow:0 0 14px rgba(87,199,255,0.5);}
+.step.done .node{background:var(--success);border-color:var(--success);color:#04101f;}
+.step.active .label{color:var(--accent-2);}
+.step.done .label{color:var(--success);}
+.step:not(:last-child)::after{
+  content:"";position:absolute;top:17px;left:calc(-50% + 17px);width:calc(100% - 34px);height:2px;
+  background:var(--border);z-index:1;
+}
+[dir="rtl"] .step:not(:last-child)::after{left:auto;right:calc(-50% + 17px);}
+.step.done:not(:last-child)::after{background:var(--success);}
+
+/* ===== CARD ===== */
+.card{
+  background:linear-gradient(180deg,var(--bg-panel),var(--bg-panel-2));
+  border:1px solid var(--border);border-radius:18px;padding:32px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+}
+.hero-card{text-align:center;padding:56px 32px;}
+.hero-crest{
+  width:88px;height:88px;border-radius:22px;margin:0 auto 22px;
+  background:linear-gradient(145deg,var(--accent),var(--accent-2));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-mono);font-weight:800;font-size:28px;color:#04101f;
+  box-shadow:0 0 40px rgba(87,199,255,0.5);
+}
+h1.title{font-size:34px;font-weight:900;margin:0 0 8px;letter-spacing:.3px;}
+.subtitle{color:var(--text-muted);font-size:15px;margin:0 0 30px;}
+.eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent-2);font-weight:700;margin-bottom:10px;}
+h2.section-title{font-size:22px;font-weight:800;margin:0 0 6px;}
+.section-sub{color:var(--text-muted);font-size:14px;margin:0 0 24px;}
+
+/* ===== BUTTONS ===== */
+.btn{
+  border:none;border-radius:12px;padding:14px 26px;font-family:var(--font-body);
+  font-weight:700;font-size:15px;cursor:pointer;transition:.2s;display:inline-flex;
+  align-items:center;justify-content:center;gap:8px;
+}
+.btn-primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));color:#04101f;box-shadow:0 10px 26px rgba(47,111,237,0.4);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(47,111,237,0.55);}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text);}
+.btn-ghost:hover{border-color:var(--accent-2);color:var(--accent-2);}
+.btn-danger{background:var(--danger);color:#2a0510;}
+.btn-block{width:100%;}
+.btn-sm{padding:9px 16px;font-size:13px;border-radius:9px;}
+
+/* ===== FORM ELEMENTS ===== */
+label.field-label{display:block;font-size:13px;color:var(--text-muted);font-weight:700;margin:0 0 8px;}
+input[type="text"],input[type="date"],input[type="url"],input[type="password"],textarea,select{
+  width:100%;background:var(--bg-deep);border:1px solid var(--border);border-radius:10px;
+  padding:13px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;transition:.2s;
+}
+textarea{resize:vertical;min-height:90px;font-family:var(--font-mono);font-size:13px;}
+input:focus,textarea:focus,select:focus{border-color:var(--accent-2);box-shadow:0 0 0 3px rgba(87,199,255,0.15);}
+.field{margin-bottom:18px;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media (max-width:600px){.grid-2{grid-template-columns:1fr;}}
+
+/* ===== RULES ===== */
+.rules-box{
+  background:var(--bg-deep);border:1px solid var(--border);border-radius:14px;padding:22px 24px;
+  max-height:340px;overflow-y:auto;font-size:14.5px;color:#cfe0f7;white-space:pre-wrap;margin-bottom:22px;
+}
+.rules-box::-webkit-scrollbar{width:7px;}
+.rules-box::-webkit-scrollbar-thumb{background:var(--bg-panel-3);border-radius:10px;}
+.agree-row{display:flex;align-items:center;gap:12px;background:var(--bg-deep);border:1px solid var(--border);
+  border-radius:12px;padding:16px 18px;margin-bottom:22px;cursor:pointer;}
+.agree-row input{width:19px;height:19px;accent-color:var(--accent-2);flex-shrink:0;}
+.warn-banner{background:rgba(255,84,112,0.1);border:1px solid rgba(255,84,112,0.4);color:#ffc2ce;
+  border-radius:12px;padding:14px 16px;font-size:13.5px;margin-bottom:20px;}
+.lock-banner{background:rgba(255,182,72,0.1);border:1px solid rgba(255,182,72,0.4);color:var(--warning);
+  border-radius:12px;padding:16px 18px;font-size:14px;text-align:center;font-family:var(--font-mono);}
+
+/* ===== QUIZ ===== */
+.quiz-header{position:sticky;top:76px;z-index:30;background:var(--bg-deep);border:1px solid var(--border);
+  border-radius:14px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;gap:14px;flex-wrap:wrap;}
+.timer{font-family:var(--font-mono);font-size:26px;font-weight:700;color:var(--accent-2);letter-spacing:1px;}
+.timer.low{color:var(--danger);animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+.progress-track{flex:1;min-width:120px;height:6px;background:var(--bg-panel-3);border-radius:6px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .3s;}
+.skip-token{font-family:var(--font-mono);font-size:12px;color:var(--warning);border:1px solid rgba(255,182,72,0.4);
+  padding:6px 10px;border-radius:8px;background:rgba(255,182,72,0.08);}
+
+.q-card{background:var(--bg-panel);border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:16px;}
+.q-num{font-family:var(--font-mono);font-size:12px;color:var(--accent-2);font-weight:700;margin-bottom:6px;}
+.q-text{font-size:16px;font-weight:700;margin-bottom:16px;}
+.opt-row{display:flex;align-items:center;gap:12px;background:var(--bg-deep);border:1px solid var(--border);
+  border-radius:10px;padding:12px 14px;margin-bottom:9px;cursor:pointer;transition:.15s;}
+.opt-row:hover{border-color:var(--accent-2);}
+.opt-row.selected{border-color:var(--accent-2);background:rgba(87,199,255,0.08);}
+.opt-row input{accent-color:var(--accent-2);width:17px;height:17px;flex-shrink:0;}
+.skip-btn{font-size:12px;color:var(--warning);background:none;border:1px dashed rgba(255,182,72,0.5);
+  border-radius:8px;padding:6px 12px;cursor:pointer;margin-top:6px;}
+.skip-btn:disabled{opacity:.3;cursor:not-allowed;}
+.q-card.skipped{opacity:.55;}
+
+/* ===== RESULT ===== */
+.result-score{font-family:var(--font-mono);font-size:64px;font-weight:800;text-align:center;margin:6px 0 4px;}
+.result-score.pass{color:var(--success);}
+.result-score.fail{color:var(--danger);}
+.result-tag{text-align:center;font-weight:800;font-size:18px;letter-spacing:1px;margin-bottom:26px;}
+.result-tag.pass{color:var(--success);}
+.result-tag.fail{color:var(--danger);}
+
+/* ===== ADMIN ===== */
+.admin-tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap;}
+.admin-tab{background:var(--bg-deep);border:1px solid var(--border);color:var(--text-muted);
+  padding:9px 16px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:700;}
+.admin-tab.active{border-color:var(--accent-2);color:var(--accent-2);background:rgba(87,199,255,0.08);}
+.q-admin-item{background:var(--bg-deep);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;}
+.q-admin-item .opts-mini{font-size:12.5px;color:var(--text-muted);margin-top:6px;}
+.q-admin-item .opts-mini b{color:var(--success);}
+.row-between{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.tag-pill{display:inline-block;background:var(--bg-panel-3);border-radius:999px;padding:3px 10px;font-size:11px;color:var(--text-muted);font-family:var(--font-mono);}
+.divider{height:1px;background:var(--border);margin:26px 0;}
+.helper-text{font-size:12.5px;color:var(--text-muted);margin-top:-10px;margin-bottom:16px;}
+.footer-note{text-align:center;color:var(--text-muted);font-size:12px;margin-top:30px;font-family:var(--font-mono);}
+.opt-input-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.opt-input-row input[type="radio"]{accent-color:var(--success);width:18px;height:18px;flex-shrink:0;}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--bg-panel-3);
+  border:1px solid var(--accent-2);color:var(--text);padding:12px 22px;border-radius:12px;font-size:13.5px;
+  z-index:100;box-shadow:0 10px 30px rgba(0,0,0,0.4);animation:fadeIn .25s ease;}
+</style>
+</head>
+<body>
+<div id="app"><div style="padding:60px;text-align:center;color:#8fa6c9;font-family:'JetBrains Mono',monospace;">Loading Dz Complex RP…</div></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================= TRANSLATIONS ============================= */
+const T = {
+  ar:{
+    dir:"rtl", tagline:"بوابة الانضمام الرسمية",
+    home_title:"Dz Complex RP", home_sub:"مقابلة القبول الرسمية — أجب بصدق وثقة لتثبت جاهزيتك للانضمام إلى المجتمع.",
+    start_interview:"إنشاء مقابلة", admin_panel:"لوحة التحكم",
+    rp_rules_btn:"قوانين الرول بلاي", server_terms_btn:"مصطلحات السيرفر",
+    rp_rules_title:"قوانين الرول بلاي", rp_rules_sub:"يجب معرفة والالتزام بهذه القوانين داخل السيرفر.",
+    server_terms_title:"مصطلحات وعبارات السيرفر", server_terms_sub:"استعمل هذه العبارات داخل الشخصية (IC) عوض المصطلحات التقنية الحقيقية.",
+    already_applied_title:"لديك مقابلة سابقة", already_applied_msg:"لقد قمت بهذه المقابلة من قبل وتم قبولك، لا يمكنك إعادة المقابلة بنفس معرف الديسكورد.",
+    step_rules:"القوانين", step_quiz:"الأسئلة", step_result:"النتيجة", step_info:"المعلومات",
+    rules_eyebrow:"قبل أن تبدأ", rules_title:"قوانين المقابلة", rules_sub:"اقرأ القوانين بعناية ثم أدخل معرفك في ديسكورد للمتابعة.",
+    discord_id_label:"معرف الديسكورد (Discord ID)", discord_id_ph:"مثال: 123456789012345678",
+    agree_label:"لقد قرأت القوانين وأنا موافق ومستعد لبدء المقابلة",
+    btn_agree_start:"موافق، أنا مستعد", locked_msg:"لقد استنفدت محاولاتك المتاحة. يرجى الانتظار",
+    locked_msg2:"قبل إعادة المحاولة.", attempts_left:"المحاولات المتبقية",
+    warn_tab:"تنبيه: الخروج من هذه الصفحة أو فتح متصفح/تبويب آخر أثناء الإجابة يُعتبر غشًا وسيؤدي لرسوبك الفوري.",
+    quiz_title:"أجب عن الأسئلة", time_left:"الوقت المتبقي", question_word:"سؤال", of_word:"من",
+    skip_available:"تخطي متاح", skip_used:"تم استخدام التخطي", skip_btn:"لا أعرف — تخطي هذا السؤال (مرة واحدة فقط)",
+    submit_answers:"إرسال الإجابات", confirm_submit:"هل أنت متأكد من إرسال إجاباتك؟ لا يمكن التراجع.",
+    result_pass:"مبروك! لقد نجحت", result_fail:"للأسف، لقد رسبت", result_cheat:"تم رصد محاولة غش — رسوب فوري",
+    result_score_label:"نتيجتك", continue_btn:"متابعة إلى استمارة البيانات", retry_btn:"إعادة المحاولة",
+    back_home:"العودة للرئيسية",
+    info_eyebrow:"الخطوة الأخيرة", info_title:"استمارة معلومات المتقدم", info_sub:"أدخل بياناتك بدقة، ستُرسل هذه المعلومات مع نتيجتك مباشرة إلى إدارة الخادم.",
+    fname:"الاسم", lname:"اللقب", bdate:"تاريخ الميلاد", steam:"رابط حساب Steam", discord:"معرف الديسكورد",
+    send_info:"موافق، إرسال المعلومات", sent_ok:"تم الإرسال بنجاح! سيتم التواصل معك قريبًا عبر ديسكورد.",
+    sent_fail:"تعذر الإرسال. تأكد أن رابط الويب هوك مُفعّل من طرف الإدارة، ثم أعد المحاولة.",
+    admin_login_title:"دخول لوحة التحكم", admin_pass_label:"كلمة المرور", admin_login_btn:"دخول",
+    admin_wrong_pass:"كلمة المرور غير صحيحة", admin_title:"لوحة التحكم", tab_rules:"القوانين والإعدادات",
+    tab_questions:"الأسئلة", tab_attempts:"المحاولات", tab_rprules:"قوانين الرول بلاي", tab_terms:"المصطلحات", logout:"تسجيل الخروج",
+    save_btn:"حفظ التغييرات", saved_toast:"تم الحفظ ✓",
+    rules_ar:"نص القوانين (عربي)", rules_fr:"نص القوانين (فرنسي)", rules_en:"نص القوانين (إنجليزي)",
+    rprules_ar:"نص قوانين الرول بلاي (عربي)", rprules_fr:"نص قوانين الرول بلاي (فرنسي)", rprules_en:"نص قوانين الرول بلاي (إنجليزي)",
+    terms_ar:"نص المصطلحات (عربي)", terms_fr:"نص المصطلحات (فرنسي)", terms_en:"نص المصطلحات (إنجليزي)",
+    logo_label:"رابط شعار السيرفر (صورة)",
+    webhook_label:"رابط ويب هوك ديسكورد (Webhook URL)", passmark_label:"العلامة الناجحة (من 20)",
+    time_label:"مدة الاختبار الكلية (بالثواني)", attempts_label:"عدد المحاولات المسموحة",
+    cooldown_label:"مدة الانتظار بعد استنفاد المحاولات (ساعات)", change_pass_label:"تغيير كلمة مرور لوحة التحكم (اتركها فارغة لعدم التغيير)",
+    add_question:"إضافة سؤال جديد", q_text_label:"نص السؤال", opt_label:"الخيار", correct_label:"صحيح",
+    add_btn:"إضافة", existing_q:"الأسئلة الحالية", delete_btn:"حذف", edit_btn:"تعديل", update_btn:"تحديث",
+    cancel_btn:"إلغاء", no_attempts:"لا توجد محاولات مسجلة بعد.", locked_tag:"محظور مؤقتًا", active_tag:"نشط",
+    fails_word:"محاولات فاشلة", until_word:"حتى", need_all_fields:"يرجى تعبئة جميع الحقول.",
+    need_discord_id:"يرجى إدخال معرف الديسكورد.", loading:"جاري التحميل…"
+  },
+  fr:{
+    dir:"ltr", tagline:"Portail officiel de recrutement",
+    home_title:"Dz Complex RP", home_sub:"Entretien officiel d'admission — répondez avec sincérité et assurance pour prouver votre préparation à rejoindre la communauté.",
+    start_interview:"Créer un entretien", admin_panel:"Panneau d'administration",
+    rp_rules_btn:"Règles de Roleplay", server_terms_btn:"Termes du serveur",
+    rp_rules_title:"Règles de Roleplay", rp_rules_sub:"Vous devez connaître et respecter ces règles sur le serveur.",
+    server_terms_title:"Termes et expressions du serveur", server_terms_sub:"Utilisez ces expressions en personnage (IC) au lieu des termes techniques réels.",
+    already_applied_title:"Vous avez déjà un entretien", already_applied_msg:"Vous avez déjà passé cet entretien et avez été accepté ; vous ne pouvez pas repasser l'entretien avec le même identifiant Discord.",
+    step_rules:"Règles", step_quiz:"Questions", step_result:"Résultat", step_info:"Informations",
+    rules_eyebrow:"Avant de commencer", rules_title:"Règles de l'entretien", rules_sub:"Lisez attentivement les règles puis entrez votre identifiant Discord pour continuer.",
+    discord_id_label:"Identifiant Discord (Discord ID)", discord_id_ph:"ex: 123456789012345678",
+    agree_label:"J'ai lu les règles et j'accepte de commencer l'entretien",
+    btn_agree_start:"D'accord, je suis prêt", locked_msg:"Vous avez épuisé vos tentatives. Veuillez attendre",
+    locked_msg2:"avant de réessayer.", attempts_left:"Tentatives restantes",
+    warn_tab:"Attention : quitter cette page ou ouvrir un autre onglet/navigateur pendant le test est considéré comme de la triche et entraîne un échec immédiat.",
+    quiz_title:"Répondez aux questions", time_left:"Temps restant", question_word:"Question", of_word:"sur",
+    skip_available:"Passe disponible", skip_used:"Passe utilisée", skip_btn:"Je ne sais pas — passer cette question (une seule fois)",
+    submit_answers:"Soumettre les réponses", confirm_submit:"Êtes-vous sûr de vouloir soumettre vos réponses ? Action irréversible.",
+    result_pass:"Félicitations, vous avez réussi", result_fail:"Malheureusement, vous avez échoué", result_cheat:"Tentative de triche détectée — échec immédiat",
+    result_score_label:"Votre score", continue_btn:"Continuer vers le formulaire", retry_btn:"Réessayer",
+    back_home:"Retour à l'accueil",
+    info_eyebrow:"Dernière étape", info_title:"Formulaire du candidat", info_sub:"Entrez vos informations avec précision ; elles seront envoyées avec votre résultat à l'administration du serveur.",
+    fname:"Prénom", lname:"Nom", bdate:"Date de naissance", steam:"Lien du profil Steam", discord:"Identifiant Discord",
+    send_info:"Accepter et envoyer", sent_ok:"Envoyé avec succès ! Vous serez contacté prochainement sur Discord.",
+    sent_fail:"Échec de l'envoi. Vérifiez que le lien webhook est configuré par l'administration, puis réessayez.",
+    admin_login_title:"Accès au panneau d'administration", admin_pass_label:"Mot de passe", admin_login_btn:"Entrer",
+    admin_wrong_pass:"Mot de passe incorrect", admin_title:"Panneau d'administration", tab_rules:"Règles et paramètres",
+    tab_questions:"Questions", tab_attempts:"Tentatives", tab_rprules:"Règles RP", tab_terms:"Termes", logout:"Déconnexion",
+    save_btn:"Enregistrer les modifications", saved_toast:"Enregistré ✓",
+    rules_ar:"Texte des règles (Arabe)", rules_fr:"Texte des règles (Français)", rules_en:"Texte des règles (Anglais)",
+    rprules_ar:"Texte des règles RP (Arabe)", rprules_fr:"Texte des règles RP (Français)", rprules_en:"Texte des règles RP (Anglais)",
+    terms_ar:"Texte des termes (Arabe)", terms_fr:"Texte des termes (Français)", terms_en:"Texte des termes (Anglais)",
+    logo_label:"Lien du logo du serveur (image)",
+    webhook_label:"URL du webhook Discord", passmark_label:"Note de réussite (sur 20)",
+    time_label:"Durée totale du test (en secondes)", attempts_label:"Nombre de tentatives autorisées",
+    cooldown_label:"Délai d'attente après tentatives épuisées (heures)", change_pass_label:"Changer le mot de passe admin (laisser vide pour ne pas changer)",
+    add_question:"Ajouter une question", q_text_label:"Texte de la question", opt_label:"Option", correct_label:"Correcte",
+    add_btn:"Ajouter", existing_q:"Questions existantes", delete_btn:"Supprimer", edit_btn:"Modifier", update_btn:"Mettre à jour",
+    cancel_btn:"Annuler", no_attempts:"Aucune tentative enregistrée pour le moment.", locked_tag:"Bloqué temporairement", active_tag:"Actif",
+    fails_word:"tentatives échouées", until_word:"jusqu'à", need_all_fields:"Veuillez remplir tous les champs.",
+    need_discord_id:"Veuillez entrer votre identifiant Discord.", loading:"Chargement…"
+  },
+  en:{
+    dir:"ltr", tagline:"Official recruitment portal",
+    home_title:"Dz Complex RP", home_sub:"Official admission interview — answer honestly and confidently to prove you're ready to join the community.",
+    start_interview:"Start Interview", admin_panel:"Admin Panel",
+    rp_rules_btn:"Roleplay Rules", server_terms_btn:"Server Terms",
+    rp_rules_title:"Roleplay Rules", rp_rules_sub:"You must know and follow these rules on the server.",
+    server_terms_title:"Server Terms & Phrases", server_terms_sub:"Use these in-character (IC) phrases instead of real technical terms.",
+    already_applied_title:"You already have an application", already_applied_msg:"You have already taken this interview and were accepted; you cannot retake it with the same Discord ID.",
+    step_rules:"Rules", step_quiz:"Questions", step_result:"Result", step_info:"Information",
+    rules_eyebrow:"Before you begin", rules_title:"Interview Rules", rules_sub:"Read the rules carefully, then enter your Discord ID to continue.",
+    discord_id_label:"Discord ID", discord_id_ph:"e.g. 123456789012345678",
+    agree_label:"I have read the rules and I agree to start the interview",
+    btn_agree_start:"I agree, I'm ready", locked_msg:"You have used all your attempts. Please wait",
+    locked_msg2:"before trying again.", attempts_left:"Attempts remaining",
+    warn_tab:"Warning: leaving this page or opening another tab/browser during the test counts as cheating and results in immediate failure.",
+    quiz_title:"Answer the questions", time_left:"Time left", question_word:"Question", of_word:"of",
+    skip_available:"Skip available", skip_used:"Skip used", skip_btn:"I don't know — skip this question (one time only)",
+    submit_answers:"Submit answers", confirm_submit:"Are you sure you want to submit your answers? This cannot be undone.",
+    result_pass:"Congratulations, you passed", result_fail:"Unfortunately, you failed", result_cheat:"Cheating attempt detected — immediate failure",
+    result_score_label:"Your score", continue_btn:"Continue to information form", retry_btn:"Try again",
+    back_home:"Back to home",
+    info_eyebrow:"Final step", info_title:"Applicant information form", info_sub:"Enter your details accurately; this will be sent along with your result directly to server management.",
+    fname:"First name", lname:"Last name", bdate:"Date of birth", steam:"Steam profile link", discord:"Discord ID",
+    send_info:"Agree and send", sent_ok:"Sent successfully! You will be contacted soon on Discord.",
+    sent_fail:"Failed to send. Make sure the webhook link has been set by the administration, then try again.",
+    admin_login_title:"Admin Panel Access", admin_pass_label:"Password", admin_login_btn:"Enter",
+    admin_wrong_pass:"Incorrect password", admin_title:"Admin Panel", tab_rules:"Rules & Settings",
+    tab_questions:"Questions", tab_attempts:"Attempts", tab_rprules:"RP Rules", tab_terms:"Terms", logout:"Log out",
+    save_btn:"Save changes", saved_toast:"Saved ✓",
+    rules_ar:"Rules text (Arabic)", rules_fr:"Rules text (French)", rules_en:"Rules text (English)",
+    rprules_ar:"RP rules text (Arabic)", rprules_fr:"RP rules text (French)", rprules_en:"RP rules text (English)",
+    terms_ar:"Terms text (Arabic)", terms_fr:"Terms text (French)", terms_en:"Terms text (English)",
+    logo_label:"Server logo image link",
+    webhook_label:"Discord Webhook URL", passmark_label:"Passing score (out of 20)",
+    time_label:"Total test duration (seconds)", attempts_label:"Number of allowed attempts",
+    cooldown_label:"Wait time after attempts are used up (hours)", change_pass_label:"Change admin password (leave blank to keep)",
+    add_question:"Add new question", q_text_label:"Question text", opt_label:"Option", correct_label:"Correct",
+    add_btn:"Add", existing_q:"Existing questions", delete_btn:"Delete", edit_btn:"Edit", update_btn:"Update",
+    cancel_btn:"Cancel", no_attempts:"No attempts recorded yet.", locked_tag:"Temporarily locked", active_tag:"Active",
+    fails_word:"failed attempts", until_word:"until", need_all_fields:"Please fill in all fields.",
+    need_discord_id:"Please enter your Discord ID.", loading:"Loading…"
+  }
+};
+
+const DEFAULT_RULES = {
+  ar:`مرحبًا بك في مقابلة الانضمام الرسمية لـ Dz Complex RP.
+
+- ستتم مواجهتك بـ 20 سؤالاً يتم اختيارها عشوائيًا من بنك أسئلة كبير، وتظهر بترتيب عشوائي في كل محاولة.
+- لديك سؤال واحد فقط "لا أعرف" يمكنك تخطيه دون أن يُحسب عليك، استعملها بحكمة.
+- لديك مدة زمنية محددة لإكمال كل الأسئلة، بمجرد انتهاء الوقت سيتم إرسال إجاباتك تلقائيًا كما هي.
+- يجب أن تجيب فوق العلامة الناجحة لتنجح في المقابلة.
+- ممنوع منعًا باتًا فتح أي متصفح أو تبويب آخر أثناء الإجابة على الأسئلة، أي خروج عن هذه الصفحة يُعتبر غشًا ويؤدي إلى رسوبك الفوري.
+- لديك عدد محدود من المحاولات، في حال فشلك فيها جميعًا يجب عليك الانتظار 24 ساعة قبل إعادة المحاولة.
+- بعد نجاحك، سيُطلب منك ملء استمارة ببياناتك الشخصية ليتم إرسالها إلى إدارة الخادم عبر ديسكورد.
+
+بالتوفيق!`,
+  fr:`Bienvenue à l'entretien officiel d'admission de Dz Complex RP.
+
+- Vous ferez face à 20 questions sélectionnées aléatoirement dans une grande banque de questions, affichées dans un ordre aléatoire à chaque tentative.
+- Vous disposez d'un seul "je ne sais pas" que vous pouvez utiliser pour passer une question sans qu'elle soit comptée contre vous.
+- Vous avez un temps limité pour compléter toutes les questions ; une fois le temps écoulé, vos réponses seront soumises automatiquement telles quelles.
+- Vous devez dépasser la note de réussite pour valider l'entretien.
+- Il est strictement interdit d'ouvrir un autre onglet ou navigateur pendant le test ; quitter cette page est considéré comme de la triche et entraîne un échec immédiat.
+- Vous disposez d'un nombre limité de tentatives ; en cas d'échec de toutes vos tentatives, vous devrez attendre 24 heures avant de réessayer.
+- Après votre réussite, un formulaire vous sera demandé afin d'envoyer vos informations à l'administration du serveur via Discord.
+
+Bonne chance !`,
+  en:`Welcome to the official Dz Complex RP admission interview.
+
+- You will face 20 questions randomly selected from a large question bank, shown in random order each attempt.
+- You have exactly one "I don't know" pass you can use to skip one question without it counting against you.
+- You have a limited time to complete all questions; once time runs out, your answers will be submitted automatically as they are.
+- You must score above the passing mark to succeed.
+- It is strictly forbidden to open another tab or browser while answering; leaving this page counts as cheating and results in immediate failure.
+- You have a limited number of attempts; if you fail all of them, you must wait 24 hours before trying again.
+- After passing, you will be asked to fill a form with your details to be sent to server management via Discord.
+
+Good luck!`
+};
+
+const DEFAULT_RP_RULES = {
+  ar:`1. Mass RP (بيئة المدينة العامة)
+يجب احترام أن المدينة مأهولة بملايين السكان. الأماكن العامة مثل المستشفيات ومراكز الشرطة لها هيبة ولا يجوز التصرف فيها كأنها فارغة.
+
+2. Fast-RP / Skip RP (اختصار السيناريو)
+يُمنع حرق الأحداث أو تسريع القصة بطرق غير واقعية، مثل التعرف على هوية شخص مقنع بمجرد النظر إلى لون سيارته أو ملابسه.
+
+3. Powergaming (القوة الخارقة)
+يُمنع القيام بأفعال مستحيلة في الحياة الواقعية، مثل القفز بالسيارة من جسر والنهوض كأن شيئاً لم يكن، أو تجاهل الأضرار الجسدية.
+
+4. RDM / Free-Kill (القتل العشوائي)
+يُمنع منعاً باتاً قتل أو إطلاق النار على أي لاعب أو مواطن دون وجود سبب قصة (RP) قوي وتحذير مسبق.
+
+5. VDM / Car-Kill (الدهس العمد)
+يُمنع استخدام المركبات كأداة لدهس اللاعبين أو قتلهم، سواء كان ذلك بسبق إصرار أو بدون سبب.
+
+6. Drive-by (الإطلاق من المركبة)
+يُمنع إطلاق النار من داخل المركبات أثناء القيادة إلا في الحالات الاستثنائية التي تحددها إدارة السيرفر.
+
+7. Revenge Killing / RK (الانتقام بعد الموت)
+يُمنع العودة للانتقام من الشخص الذي قام بقتلك في السيناريو السابق، لأن شخصيتك نسيت ما حدث.
+
+8. Metagaming (استخدام معلومات خارجية)
+يُمنع استخدام أي معلومات حصلت عليها من خارج اللعبة (مثل الديسكورد أو البث المباشر) وتطبيقها داخل السيرفر.
+
+9. Bunny Hopping / Bunny Jump (القفز المتكرر)
+يُمنع القفز المتتالي أثناء الركض بهدف التحرك بشكل أسرع أو الهروب، لأنها حركة غير واقعية.
+
+10. Force RP (إجبار السيناريو)
+يُمنع فرض سيناريو معين على لاعب آخر وإجباره على الخسارة أو الانصياع دون إعطائه فرصة للرد والتمثيل.
+
+11. Character Consistency (تناقض الشخصية)
+يجب أن تلتزم بتوجه شخصيتك؛ يُمنع القيام بأفعال تخالف دورك تماماً (مثل شرطي يسرق البنوك علناً بدون بناء قصة فساد مسبقة ومعتمدة).
+
+12. Playing to Win / Win-RP (حب الفوز)
+يُمنع اللعب فقط من أجل الفوز بالسيناريو ومقاومة الخسارة بأي ثمن. الرول بلاي هو متعة متبادلة (ربح وخسارة).
+
+13. Fear RP (قاعدة الخوف)
+يجب أن تجسد الخوف على حياتك في اللعبة تماماً كالواقع؛ إذا تم تهديدك بسلاح وأنت أعزل، يجب عليك الاستسلام فوراً.
+
+14. Fair Play (اللعب العادل)
+يجب الالتزام بالروح الرياضية وعدم استغلال الأعداد الضخمة أو الثغرات لإفساد متعة الطرف الآخر.
+
+15. Mixing (خلط الشخصيات)
+يُمنع خلط حياتك الحقيقية وشخصيتك الواقعية بأحداث ومجريات السيرفر والتمثيل.
+
+16. Cop Baiting (استفزاز الشرطة)
+يُمنع استدراج الشرطة أو التحرش بهم وملاحقتهم بلا سبب منطقي لمجرد بدء مطاردة أو قتال.
+
+17. Pain RP (تمثيل الألم)
+يجب التفاعل وتمثيل الألم عند تعرضك لحادث سيارة، ضرب، أو صعق كهربائي، وعدم التصرف كأنك لا تشعر بشيء.
+
+18. Exploiting / Use-bug (استغلال الثغرات)
+يُمنع منعاً باتاً استغلال أخطاء السيرفر (Glitch) أو الكود البرمجي للحصول على ميزات غير عادلة (عقوبتها الباند الفوري).
+
+19. Stream Sniping (سرقة البث)
+يُمنع الدخول لبث مباشر لأحد اللاعبين لمعرفة موقعه أو خططه ومباغتته داخل اللعبة.
+
+20. Combat Logging / ALT+F4 (الهروب من السيناريو)
+يُمنع الخروج من السيرفر أو إغلاق اللعبة أثناء سيناريو قائم (مثل الاعتقال أو القتال) للهروب من العواقب.
+
+21. OOC / HRP (خارج النطاق)
+يُمنع التحدث بصوتك الحقيقي عن أمور خارج اللعبة أثناء السيناريوهات، ويجب استخدام المايك فقط للكلام داخل الشخصية (IC).
+
+22. Character Kill / Mort RP (الموت الدائم)
+في حال تفعيل هذه القاعدة، تموت شخصيتك نهائياً وتفقد ممتلكاتها ويتحتم عليك البدء بشخصية وقصة جديدة تماماً.
+
+23. NLR / New Life Rule (قانون الحياة الجديدة)
+عند دخولك في غيبوبة (Coma) والاستيقاظ في المستشفى، يجب عليك نسيان السيناريو الأخير الذي تسبب في موتك بالكامل.
+
+24. Third-Partying / Mix-scene (التدخل كطرف ثالث)
+يُمنع التدخل في مشهد أو قتال قائم بين مجموعتين (مثلاً: عصابتين تتقاتلان، يُمنع على عصابة ثالثة الدخول فجأة وسط المعركة).
+
+25. Power-Authorization / Corrupt RP (حدود الفساد)
+يُمنع على موظفي الدولة (شرطة، مسعفين، قضاة) ممارسة الفساد أو التعاون مع العصابات دون قصة فساد معتمدة مسبقاً من الإدارة.
+
+26. Safe Zones (المناطق الآمنة)
+يُمنع منعاً باتاً القيام بأي أعمال إجرامية (خطف، قتل، سرقة، مشاجرات) داخل أو حول المناطق الآمنة المحددة في السيرفر (مثل: المستشفى الرئيسي، مركز الشرطة، محلات الملابس، ونقاط رسبون اللاعبين الجدد).
+
+27. Green Zone / Red Zone (المناطق الخضراء والحمراء)
+Green Zone: مناطق يُمنع فيها القتال تماماً لحماية اللاعبين.
+Red Zone: مناطق النزاع حيث يُسمح فيها بالقتال وإطلاق النار.
+
+28. Body Dumping (إخفاء الجثث)
+يُمنع رمي جثة لاعب آخر في مكان مستحيل الوصول إليه (مثل أعماق المحيط أو فوق جبل شاهق) بهدف منعه من تلقي الإسعاف أو إجباره على نسيان السيناريو (NLR) وضياع حقه.
+
+29. Vehicle Ramming (صدم السيارات بالسيارات)
+يُمنع استخدام السيارات لصدم سيارات أخرى بشكل متكرر وجنوني، ويجب الحفاظ على سلامة المركبة قدر الإمكان لواقعية القيادة.
+
+30. Backseating / Admin-RP (تقمص دور الإدارة)
+يُمنع على اللاعبين العاديين إيقاف السيناريو ومحاسبة الآخرين على أخطائهم في القوانين أثناء اللعب. إذا رأيت مخالفة، أكمل السيناريو ثم توجه لفتح تذكرة (Ticket) في الديسكورد ودع الإدارة تتصرف.
+
+31. Looting / Ninja Looting (سرقة الجثث العشوائية)
+يُمنع سرقة أسلحة أو أغراض لاعبين آخرين سقطوا في غيبوبة إذا لم تكن أنت طرفاً أساسياً في السيناريو أو القتال الذي دار ضدهم.
+
+32. Hostage Rules (قوانين الرهائن)
+يُمنع استخدام الأصدقاء أو أعضاء العصابة أنفسهم كـ "رهائن وهميين" في عمليات السطو (مثل سرقة البنوك) للاتفاق مع الشرطة وتسهيل الهروب؛ يجب أن يكون الرهينة لاعباً مدنياً حقيقياً.`,
+  fr:``,
+  en:``
+};
+
+const DEFAULT_SERVER_TERMS = {
+  ar:`في السيرفر نستعمل عبارات داخل الشخصية (In-Character) عوض المصطلحات التقنية الحقيقية، حتى نحافظ على واقعية الرول بلاي. إليك القائمة الكاملة:
+
+Lag (التعليق واللاغ) → "راسي يوجعني" / "دايخ"
+Low FPS (تقطيع الفريمات) → "عيني ترمش" / "رؤيتي متقطعة"
+Mic Error (مشكلة المايك) → "مشكل في الحنجرة" / "عندي مشكلة بالحبال الصوتية"
+Audio Error (مشكلة السماع) → "أذني مسدودة" / "طرش خفيف"
+Game Crash (خروج من اللعبة) → "جاتني سكتة قلبية" / "غمي علي ونمت"
+Server Restart (ريستارت السيرفر) → "اعصار" / "عاصفة"
+Discord (الديسكورد) → "البريد الإلكتروني" / "الراديو الكبير" / "الموازي"
+Admin (الآدمن والإدارة) → "شبح"
+Ticket (تذكرة الدعم) → "برقية"
+Keyboard / Mouse (التحكم) → "عضلات اليد" / "أصابعي"
+Stream / Live (البث المباشر) → "كاميرا فوق راسي" / "الكاميرا الخفية"
+Bug / Glitch (خطأ في السيرفر) → "سحر"`,
+  fr:``,
+  en:``
+};
+
+const DEFAULT_QUESTIONS = [
+ q("ما هو مبدأ Mass RP؟",["احترام أن المدينة مأهولة بالسكان وعدم التصرف في الأماكن العامة كأنها فارغة","الدخول لمنطقة خاصة بأكبر عدد ممكن من اللاعبين","تجاهل وجود مواطنين آخرين في المدينة","اللعب الجماعي فقط مع أصدقائك"],0),
+ q("ما معنى Fast-RP / Skip RP؟",["حرق الأحداث أو تسريع القصة بطرق غير واقعية مثل معرفة هوية شخص مقنع من لون سيارته فقط","أخذ وقت كافٍ لتطوير القصة","انتظار رد الطرف الآخر بصبر","تصوير المشهد بسرعة"],0),
+ q("ما هو Powergaming؟",["القيام بأفعال مستحيلة واقعياً مثل القفز بالسيارة من جسر والنهوض دون أي ضرر","الالتزام بالضرر الجسدي الواقعي","اللعب بحذر شديد","احترام قواعد المرور"],0),
+ q("ما هو RDM / Free-Kill؟",["قتل أو إطلاق النار على لاعب أو مواطن دون سبب قصة (RP) قوي وتحذير مسبق","الدفاع عن النفس بعد تهديد واضح","إطلاق نار بعد نزاع طويل ومبرر","تحذير الخصم ثم الانسحاب"],0),
+ q("ما هو VDM / Car-Kill؟",["استخدام المركبة كأداة لدهس اللاعبين أو قتلهم بقصد أو بدون سبب","القيادة بحذر داخل المدينة","ركن السيارة في مكان مخصص","إصلاح السيارة بعد حادث"],0),
+ q("متى يُسمح بـ Drive-by (الإطلاق من المركبة)؟",["فقط في الحالات الاستثنائية التي تحددها إدارة السيرفر","في أي وقت وبدون قيود","فقط أثناء السباقات","ممنوع كليًا بدون استثناء"],0),
+ q("ما هو Revenge Killing / RK؟",["العودة للانتقام من الشخص الذي قتلك في السيناريو السابق رغم أن شخصيتك نسيت الحدث","الدفاع عن شخصية جديدة","الإبلاغ عن القاتل للشرطة داخل اللعبة","بدء قصة جديدة كليًا"],0),
+ q("ما هو Metagaming؟",["استخدام معلومات حصلت عليها من خارج اللعبة (كالديسكورد أو البث المباشر) وتطبيقها داخل السيرفر","التحدث مع الأصدقاء في ديسكورد عن مواضيع لا علاقة لها باللعبة","مشاهدة بث لاعب آخر دون التأثير على أحداث اللعبة","استعمال الراديو داخل اللعبة"],0),
+ q("ما هو Bunny Hopping؟",["القفز المتتالي أثناء الركض بهدف التحرك بشكل أسرع أو الهروب","المشي ببطء داخل المدينة","الجري بشكل طبيعي","القفز فوق سياج مرة واحدة"],0),
+ q("ما هو Force RP؟",["فرض سيناريو معين على لاعب آخر وإجباره على الخسارة أو الانصياع دون منحه فرصة الرد","اقتراح سيناريو على لاعب آخر وانتظار رده","التفاوض المتبادل بين طرفين","طلب المساعدة من لاعب آخر"],0),
+ q("ما هو مبدأ Character Consistency؟",["الالتزام بتوجه شخصيتك وعدم القيام بأفعال تخالف دورها كليًا دون قصة فساد معتمدة","تغيير شخصية اللاعب كل يوم","لعب أكثر من دور في نفس الوقت دون تنسيق","تقليد شخصية لاعب آخر"],0),
+ q("ما هو Playing to Win / Win-RP؟",["اللعب فقط من أجل الفوز بالسيناريو ومقاومة الخسارة بأي ثمن رغم أن الرول بلاي متعة متبادلة","قبول الخسارة والفوز كجزء من القصة","التعاون مع الطرف الآخر لبناء سيناريو أفضل","الانسحاب عند الشعور بالخسارة"],0),
+ q("ما هي قاعدة Fear RP؟",["تجسيد الخوف الواقعي على حياتك؛ فإذا هُددت بسلاح وأنت أعزل يجب الاستسلام فوراً","مقاومة أي تهديد مهما كانت الظروف","تجاهل التهديدات لأنها مجرد لعبة","الهروب دائمًا بغض النظر عن الموقف"],0),
+ q("ما معنى Fair Play في هذا السيرفر؟",["الالتزام بالروح الرياضية وعدم استغلال الأعداد الضخمة أو الثغرات لإفساد متعة الطرف الآخر","اللعب بأي وسيلة لتحقيق الفوز","استغلال أي ثغرة متاحة لصالحك","تجميع أكبر عدد من الحلفاء لسحق الخصم"],0),
+ q("ما هو Mixing؟",["خلط حياتك الحقيقية وشخصيتك الواقعية بأحداث ومجريات السيرفر والتمثيل","التركيز فقط على أحداث اللعبة","الفصل التام بين الواقع والشخصية","تطوير خلفية قصة للشخصية"],0),
+ q("ما هو Cop Baiting؟",["استدراج الشرطة أو التحرش بهم وملاحقتهم بلا سبب منطقي لمجرد إثارة مطاردة","التعاون مع الشرطة أثناء التحقيق","الاستسلام للشرطة عند الاعتقال","الإبلاغ عن جريمة حقيقية للشرطة"],0),
+ q("ما هي قاعدة Pain RP؟",["التفاعل وتمثيل الألم عند التعرض لحادث سيارة أو ضرب أو صعق كهربائي وعدم التصرف بلا مبالاة","تجاهل أي إصابة جسدية تمامًا","الجري بسرعة كاملة بعد حادث خطير","الضحك أثناء الإصابة"],0),
+ q("ما حكم Exploiting / Use-bug؟",["ممنوع منعاً باتاً استغلال أخطاء السيرفر أو الكود البرمجي للحصول على ميزات غير عادلة، وعقوبته الباند الفوري","مسموح إذا لم تلاحظه الإدارة","مسموح لمرة واحدة فقط","يعتمد فقط على نوع الخطأ"],0),
+ q("ما هو Stream Sniping؟",["الدخول لبث مباشر لأحد اللاعبين لمعرفة موقعه أو خططه ومباغتته داخل اللعبة","متابعة بث لاعب آخر للترفيه فقط دون التأثير على اللعب","مشاهدة إعادة لمباراة قديمة","التعليق على بث صديق"],0),
+ q("ما هو Combat Logging / ALT+F4؟",["الخروج من السيرفر أو إغلاق اللعبة أثناء سيناريو قائم مثل الاعتقال أو القتال للهروب من العواقب","الخروج من اللعبة بعد انتهاء كل الأحداث بشكل طبيعي","إعادة تشغيل اللعبة بعد مشكلة تقنية موثقة","الاستراحة بين الجلسات"],0),
+ q("ما معنى OOC / HRP؟",["ممنوع التحدث بصوتك الحقيقي عن أمور خارج اللعبة أثناء السيناريوهات، ويجب استخدام المايك فقط للكلام داخل الشخصية","التحدث بحرية تامة عن أي موضوع في أي وقت","استخدام أوامر الدردشة النصية فقط","إيقاف المايك نهائيًا أثناء اللعب"],0),
+ q("ماذا يحدث عند تفعيل Character Kill / Mort RP؟",["تموت شخصيتك نهائياً وتفقد ممتلكاتها ويتحتم عليك البدء بشخصية وقصة جديدة تماماً","تعود شخصيتك للحياة تلقائياً بعد دقائق","تحتفظ بكل ممتلكاتك وتكمل بنفس الشخصية","ينتقل حسابك إلى سيرفر آخر"],0),
+ q("ما هو قانون NLR (New Life Rule)؟",["عند الدخول في غيبوبة والاستيقاظ في المستشفى، يجب نسيان السيناريو الأخير الذي تسبب في موتك بالكامل","تذكر كل تفاصيل الحادث والانتقام فوراً","العودة لنفس المكان مباشرة لمواصلة القتال","فقدان الشخصية نهائياً في كل مرة"],0),
+ q("ما هو Third-Partying / Mix-scene؟",["التدخل في مشهد أو قتال قائم بين مجموعتين، مثل دخول عصابة ثالثة فجأة وسط معركة بين عصابتين أخريين","مراقبة القتال من بعيد دون تدخل","المساعدة في فض النزاع كوسيط معتمد من الإدارة","تصوير القتال للتوثيق فقط"],0),
+ q("ما هو Body Dumping؟",["رمي جثة لاعب آخر في مكان يستحيل الوصول إليه (كعمق المحيط أو قمة جبل) لمنعه من الإسعاف أو إجباره على فقدان حقه بسبب NLR","نقل المصاب إلى المستشفى بسرعة","ترك الجثة في مكانها دون أي تدخل","إخبار الإدارة بموقع الجثة"],0),
+ q("ما حكم Power-Authorization / Corrupt RP لموظفي الدولة؟",["يُمنع على الشرطة والمسعفين والقضاة ممارسة الفساد أو التعاون مع العصابات دون قصة فساد معتمدة مسبقاً من الإدارة","مسموح لهم بالتعاون مع أي عصابة بحرية تامة","ممنوع عليهم التفاعل مع المدنيين نهائياً","مسموح فقط لكبار الضباط دون موافقة الإدارة"],0),
+ q("ما حكم القيام بأعمال إجرامية داخل Safe Zones؟",["ممنوع منعاً باتاً القيام بأي عمل إجرامي (خطف، قتل، سرقة، مشاجرات) داخل أو حول المناطق الآمنة كالمستشفى ومركز الشرطة","مسموح إذا لم يلاحظك أحد من الإدارة","مسموح فقط بالسرقة البسيطة","يعتمد على عدد اللاعبين الموجودين"],0),
+ q("ما الفرق بين Green Zone و Red Zone؟",["Green Zone يُمنع فيها القتال تماماً لحماية اللاعبين، بينما Red Zone يُسمح فيها بالقتال وإطلاق النار","كلاهما يمنعان القتال بشكل كامل","كلاهما يسمحان بالقتال الحر دون قيود","Green Zone هي منطقة القتال و Red Zone هي المنطقة الآمنة"],0),
+ q("ما حكم Vehicle Ramming؟",["يُمنع استخدام السيارات لصدم سيارات أخرى بشكل متكرر وجنوني، ويجب الحفاظ على سلامة المركبة لواقعية القيادة","مسموح به لإضافة الإثارة للمطاردات","مسموح فقط للشرطة في كل الحالات","لا توجد أي قيود على القيادة"],0),
+ q("ما هو Backseating / Admin-RP الممنوع؟",["أن يقوم لاعب عادي بإيقاف السيناريو ومحاسبة الآخرين على أخطاء القوانين بدلاً من فتح تذكرة للإدارة","فتح تذكرة (Ticket) في الديسكورد بعد ملاحظة مخالفة","إكمال السيناريو ثم الإبلاغ لاحقاً للإدارة","تجاهل المخالفة والاستمرار في اللعب"],0),
+ q("ما هو Looting / Ninja Looting؟",["سرقة أسلحة أو أغراض لاعبين سقطوا في غيبوبة من طرف شخص لم يكن طرفاً أساسياً في القتال ضدهم","أخذ أغراضك الخاصة بعد انتهاء القتال الذي شاركت فيه","تسليم الأغراض المسروقة للشرطة","ترك كل الأغراض في مكانها دون لمسها"],0),
+ q("ما هو الممنوع في Hostage Rules؟",["استخدام أصدقائك أو أعضاء عصابتك كرهائن وهميين في عمليات السطو للاتفاق مع الشرطة وتسهيل الهروب","احتجاز مدني حقيقي كرهينة أثناء عملية سطو","التفاوض مع الشرطة لإطلاق سراح الرهينة","منح الرهينة وقتاً كافياً للتفاعل قبل اتخاذ أي قرار"],0)
+];
+
+function q(text, opts, correct){ return {id: cryptoId(), text, options: opts, correct}; }
+function cryptoId(){ return 'q_' + Math.random().toString(36).slice(2,10) + Date.now().toString(36); }
+
+/* ============================= STATE ============================= */
+let lang = 'ar';
+let screen = 'home';
+let config = null;
+let questions = [];
+let quizSet = [];
+let selected = {};
+let skippedId = null;
+let skipUsed = false;
+let timeLeft = 0;
+let timerHandle = null;
+let discordId = '';
+let lastScore = 0;
+let lastPass = false;
+let lastReason = 'normal';
+let adminAuthed = false;
+let adminTab = 'rules';
+let editingQuestionId = null;
+let cheatGuardActive = false;
+
+const app = document.getElementById('app');
+
+function t(key){ return (T[lang] && T[lang][key]) || T.ar[key] || key; }
+
+/* ============================= STORAGE HELPERS ============================= */
+async function storageGet(key){
+  try{
+    const r = await window.storage.get(key, true);
+    return r ? r.value : null;
+  }catch(e){ return null; }
+}
+async function storageSet(key, value){
+  try{ await window.storage.set(key, value, true); return true; }
+  catch(e){ console.error('storage set failed', e); return false; }
+}
+async function sha256(str){
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+const DEFAULT_WEBHOOK_URL = 'https://discord.com/api/webhooks/1529564053050102001/zIvMoaHZkxNdWMRMXX8n58TPFhLgwbUY6YX9sNS2nekBiDpmMyp07Z1LfocjsCbjLAzU';
+const DEFAULT_LOGO_URL = 'https://i.postimg.cc/qBLq12Nx/content.png';
+const CONFIG_VERSION = 2;
+const QUESTIONS_VERSION = 2;
+
+async function initConfig(){
+  let raw = await storageGet('config');
+  if(raw){
+    try{ config = JSON.parse(raw); }catch(e){ config = null; }
+  }
+  let needsSave = false;
+  if(!config){
+    const hash = await sha256('11223355');
+    config = {
+      rules: JSON.parse(JSON.stringify(DEFAULT_RULES)),
+      rpRules: JSON.parse(JSON.stringify(DEFAULT_RP_RULES)),
+      serverTerms: JSON.parse(JSON.stringify(DEFAULT_SERVER_TERMS)),
+      webhookUrl: DEFAULT_WEBHOOK_URL,
+      logoUrl: DEFAULT_LOGO_URL,
+      passMark: 17,
+      totalTimeSeconds: 150,
+      maxAttempts: 3,
+      cooldownHours: 24,
+      adminPassHash: hash,
+      version: CONFIG_VERSION
+    };
+    needsSave = true;
+  }
+  // backfill any missing fields (also migrates configs saved before this update)
+  if(config.passMark===undefined){ config.passMark = 17; needsSave = true; }
+  if(config.totalTimeSeconds===undefined){ config.totalTimeSeconds = 150; needsSave = true; }
+  if(config.maxAttempts===undefined){ config.maxAttempts = 3; needsSave = true; }
+  if(config.cooldownHours===undefined){ config.cooldownHours = 24; needsSave = true; }
+  if(!config.webhookUrl){ config.webhookUrl = DEFAULT_WEBHOOK_URL; needsSave = true; }
+  if(!config.logoUrl){ config.logoUrl = DEFAULT_LOGO_URL; needsSave = true; }
+  if(!config.rpRules){ config.rpRules = JSON.parse(JSON.stringify(DEFAULT_RP_RULES)); needsSave = true; }
+  if(!config.serverTerms){ config.serverTerms = JSON.parse(JSON.stringify(DEFAULT_SERVER_TERMS)); needsSave = true; }
+  if(!config.version || config.version < CONFIG_VERSION){
+    config.totalTimeSeconds = 150; // requested: 150 seconds for the new rule-based question set
+    config.version = CONFIG_VERSION;
+    needsSave = true;
+  }
+  if(needsSave) await storageSet('config', JSON.stringify(config));
+}
+
+async function initQuestions(){
+  let verRaw = await storageGet('questions_version');
+  let ver = verRaw ? parseInt(verRaw,10) : 0;
+  let raw = await storageGet('questions');
+  if(raw){
+    try{ questions = JSON.parse(raw); }catch(e){ questions = []; }
+  }
+  if(!questions || !questions.length || ver < QUESTIONS_VERSION){
+    questions = DEFAULT_QUESTIONS;
+    await storageSet('questions', JSON.stringify(questions));
+    await storageSet('questions_version', String(QUESTIONS_VERSION));
+  }
+}
+
+async function saveConfig(){ await storageSet('config', JSON.stringify(config)); }
+async function saveQuestions(){ await storageSet('questions', JSON.stringify(questions)); }
+
+async function getAttempt(id){
+  const raw = await storageGet('attempt:'+id);
+  if(!raw) return {failCount:0, lockedUntil:0};
+  try{ return JSON.parse(raw); }catch(e){ return {failCount:0, lockedUntil:0}; }
+}
+async function setAttempt(id, data){ await storageSet('attempt:'+id, JSON.stringify(data)); }
+
+async function listAllAttempts(){
+  try{
+    const r = await window.storage.list('attempt:', true);
+    if(!r || !r.keys) return [];
+    const out = [];
+    for(const k of r.keys){
+      const raw = await storageGet(k);
+      if(raw){
+        try{ out.push({key:k, data: JSON.parse(raw)}); }catch(e){}
+      }
+    }
+    return out;
+  }catch(e){ return []; }
+}
+
+/* ============================= UTIL ============================= */
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+function fmtTime(sec){
+  const m = Math.floor(sec/60).toString().padStart(2,'0');
+  const s = Math.floor(sec%60).toString().padStart(2,'0');
+  return m+':'+s;
+}
+function esc(s){
+  return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function showToast(msg){
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(), 2200);
+}
+
+/* ============================= TOP BAR ============================= */
+function renderTopbar(){
+  const logo = config && config.logoUrl;
+  return `
+  <div class="topbar">
+    <div class="brand">
+      <div class="crest" ${logo?'id="topCrest" style="padding:0;overflow:hidden;background:var(--bg-panel);border:1px solid var(--border);"':''}>${logo?`<img src="${esc(logo)}" alt="logo" style="width:100%;height:100%;object-fit:cover;" onerror="var p=this.parentElement;this.remove();if(p){p.style.background='linear-gradient(145deg,var(--accent),var(--accent-2))';p.textContent='DZ';}">`:'DZ'}</div>
+      <div class="brand-text"><b>Dz Complex RP</b><span>${esc(t('tagline'))}</span></div>
+    </div>
+    <div class="top-actions">
+      <div class="lang-switch">
+        <button class="lang-btn ${lang==='ar'?'active':''}" data-lang="ar">AR</button>
+        <button class="lang-btn ${lang==='fr'?'active':''}" data-lang="fr">FR</button>
+        <button class="lang-btn ${lang==='en'?'active':''}" data-lang="en">EN</button>
+      </div>
+      <button class="icon-btn" id="adminGearBtn" title="${esc(t('admin_panel'))}">⚙</button>
+    </div>
+  </div>`;
+}
+
+function renderStepper(activeIndex){
+  const steps = [t('step_rules'), t('step_quiz'), t('step_result'), t('step_info')];
+  return `<div class="stepper">${steps.map((s,i)=>{
+    const cls = i<activeIndex ? 'done' : (i===activeIndex ? 'active':'');
+    return `<div class="step ${cls}"><div class="node">${i<activeIndex?'✓':(i+1)}</div><div class="label">${esc(s)}</div></div>`;
+  }).join('')}</div>`;
+}
+
+/* ============================= SCREENS ============================= */
+function renderHome(){
+  const logo = config && config.logoUrl;
+  const crestInner = logo
+    ? `<img src="${esc(logo)}" alt="logo" style="width:100%;height:100%;object-fit:cover;border-radius:22px;" onerror="var p=this.parentElement;this.remove();if(p){p.style.background='linear-gradient(145deg,var(--accent),var(--accent-2))';p.textContent='DZ';}">`
+    : 'DZ';
+  return `
+  <div class="screen">
+    <div class="card hero-card">
+      <div class="hero-crest" style="${logo?'padding:0;overflow:hidden;background:var(--bg-panel);border:1px solid var(--border);':''}">${crestInner}</div>
+      <h1 class="title">${esc(t('home_title'))}</h1>
+      <p class="subtitle">${esc(t('home_sub'))}</p>
+      <button class="btn btn-primary" id="startBtn">${esc(t('start_interview'))} →</button>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap;">
+        <button class="btn btn-ghost btn-sm" id="rpRulesBtn">📜 ${esc(t('rp_rules_btn'))}</button>
+        <button class="btn btn-ghost btn-sm" id="serverTermsBtn">💬 ${esc(t('server_terms_btn'))}</button>
+      </div>
+    </div>
+    <div class="footer-note">Dz Complex RP © ${new Date().getFullYear()}</div>
+  </div>`;
+}
+
+function renderInfoPage(titleKey, subKey, content){
+  return `
+  <div class="screen">
+    <div class="card">
+      <div class="eyebrow">Dz Complex RP</div>
+      <h2 class="section-title">${esc(t(titleKey))}</h2>
+      <p class="section-sub">${esc(t(subKey))}</p>
+      <div class="rules-box" style="max-height:520px;">${esc(content)}</div>
+      <button class="btn btn-ghost btn-block" id="infoPageBackBtn">${esc(t('back_home'))}</button>
+    </div>
+  </div>`;
+}
+
+function renderRpRulesPage(){
+  const content = (config.rpRules && (config.rpRules[lang] || config.rpRules.ar)) || '';
+  return renderInfoPage('rp_rules_title', 'rp_rules_sub', content);
+}
+
+function renderServerTermsPage(){
+  const content = (config.serverTerms && (config.serverTerms[lang] || config.serverTerms.ar)) || '';
+  return renderInfoPage('server_terms_title', 'server_terms_sub', content);
+}
+
+function renderRules(){
+  return `
+  <div class="screen">
+    ${renderStepper(0)}
+    <div class="card">
+      <div class="eyebrow">${esc(t('rules_eyebrow'))}</div>
+      <h2 class="section-title">${esc(t('rules_title'))}</h2>
+      <p class="section-sub">${esc(t('rules_sub'))}</p>
+      <div class="rules-box">${esc(config.rules[lang] || config.rules.ar)}</div>
+      <div id="lockArea"></div>
+      <div class="field">
+        <label class="field-label">${esc(t('discord_id_label'))}</label>
+        <input type="text" id="discordIdInput" placeholder="${esc(t('discord_id_ph'))}" value="${esc(discordId)}">
+      </div>
+      <label class="agree-row"><input type="checkbox" id="agreeCheck"><span>${esc(t('agree_label'))}</span></label>
+      <div class="warn-banner">⚠ ${esc(t('warn_tab'))}</div>
+      <button class="btn btn-primary btn-block" id="agreeStartBtn" disabled>${esc(t('btn_agree_start'))}</button>
+    </div>
+  </div>`;
+}
+
+function renderQuiz(){
+  const total = quizSet.length;
+  const answeredCount = Object.keys(selected).length + (skippedId?1:0);
+  const pct = Math.round((answeredCount/total)*100);
+  return `
+  <div class="screen">
+    ${renderStepper(1)}
+    <div class="quiz-header">
+      <div class="timer ${timeLeft<=15?'low':''}">${fmtTime(timeLeft)}</div>
+      <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="skip-token">${skipUsed ? '⛔ '+esc(t('skip_used')) : '✓ '+esc(t('skip_available'))}</div>
+    </div>
+    <div id="qList">
+      ${quizSet.map((qq,idx)=>renderQuestionCard(qq, idx, total)).join('')}
+    </div>
+    <button class="btn btn-primary btn-block" id="submitQuizBtn" style="margin-top:10px;">${esc(t('submit_answers'))}</button>
+  </div>`;
+}
+
+function renderQuestionCard(qq, idx, total){
+  const isSkipped = skippedId === qq.id;
+  return `
+  <div class="q-card ${isSkipped?'skipped':''}" data-qid="${qq.id}">
+    <div class="q-num">${esc(t('question_word'))} ${idx+1} ${esc(t('of_word'))} ${total}</div>
+    <div class="q-text">${esc(qq.text)}</div>
+    ${qq.options.map((opt,oi)=>`
+      <label class="opt-row ${selected[qq.id]===oi?'selected':''}">
+        <input type="radio" name="opt_${qq.id}" value="${oi}" ${selected[qq.id]===oi?'checked':''} ${isSkipped?'disabled':''}>
+        <span>${esc(opt)}</span>
+      </label>`).join('')}
+    <button class="skip-btn" data-qid="${qq.id}" ${(skipUsed && !isSkipped) ? 'disabled':''}>${isSkipped ? '↺' : ''} ${esc(t('skip_btn'))}</button>
+  </div>`;
+}
+
+function renderResult(){
+  const cls = lastPass ? 'pass':'fail';
+  let tag = lastPass ? t('result_pass') : t('result_fail');
+  if(lastReason === 'cheat') tag = t('result_cheat');
+  return `
+  <div class="screen">
+    ${renderStepper(2)}
+    <div class="card" style="text-align:center;">
+      <div class="result-score ${cls}">${lastScore}/20</div>
+      <div class="result-tag ${cls}">${esc(tag)}</div>
+      ${lastPass
+        ? `<button class="btn btn-primary" id="toInfoBtn">${esc(t('continue_btn'))} →</button>`
+        : `<div id="retryArea"></div>`
+      }
+    </div>
+  </div>`;
+}
+
+function renderInfoForm(){
+  return `
+  <div class="screen">
+    ${renderStepper(3)}
+    <div class="card">
+      <div class="eyebrow">${esc(t('info_eyebrow'))}</div>
+      <h2 class="section-title">${esc(t('info_title'))}</h2>
+      <p class="section-sub">${esc(t('info_sub'))}</p>
+      <div class="grid-2">
+        <div class="field"><label class="field-label">${esc(t('fname'))}</label><input type="text" id="fFname"></div>
+        <div class="field"><label class="field-label">${esc(t('lname'))}</label><input type="text" id="fLname"></div>
+      </div>
+      <div class="grid-2">
+        <div class="field"><label class="field-label">${esc(t('bdate'))}</label><input type="date" id="fBdate"></div>
+        <div class="field"><label class="field-label">${esc(t('discord'))}</label><input type="text" id="fDiscord" value="${esc(discordId)}"></div>
+      </div>
+      <div class="field"><label class="field-label">${esc(t('steam'))}</label><input type="url" id="fSteam" placeholder="https://steamcommunity.com/id/..."></div>
+      <button class="btn btn-primary btn-block" id="sendInfoBtn">${esc(t('send_info'))}</button>
+      <div id="sendStatus" style="margin-top:14px;"></div>
+    </div>
+  </div>`;
+}
+
+function renderAdminLogin(){
+  return `
+  <div class="screen">
+    <div class="card" style="max-width:420px;margin:0 auto;">
+      <div class="eyebrow">Dz Complex RP</div>
+      <h2 class="section-title">${esc(t('admin_login_title'))}</h2>
+      <div class="field" style="margin-top:20px;">
+        <label class="field-label">${esc(t('admin_pass_label'))}</label>
+        <input type="password" id="adminPassInput" placeholder="••••••••">
+      </div>
+      <div id="adminLoginErr" style="color:var(--danger);font-size:13px;margin-bottom:14px;"></div>
+      <button class="btn btn-primary btn-block" id="adminLoginBtn">${esc(t('admin_login_btn'))}</button>
+      <button class="btn btn-ghost btn-block" id="adminBackBtn" style="margin-top:10px;">${esc(t('back_home'))}</button>
+    </div>
+  </div>`;
+}
+
+function renderAdminPanel(){
+  return `
+  <div class="screen" style="max-width:820px;">
+    <div class="row-between" style="margin-bottom:20px;">
+      <h2 class="section-title" style="margin:0;">${esc(t('admin_title'))}</h2>
+      <button class="btn btn-ghost btn-sm" id="adminLogoutBtn">${esc(t('logout'))}</button>
+    </div>
+    <div class="admin-tabs">
+      <div class="admin-tab ${adminTab==='rules'?'active':''}" data-tab="rules">${esc(t('tab_rules'))}</div>
+      <div class="admin-tab ${adminTab==='rprules'?'active':''}" data-tab="rprules">${esc(t('tab_rprules'))}</div>
+      <div class="admin-tab ${adminTab==='terms'?'active':''}" data-tab="terms">${esc(t('tab_terms'))}</div>
+      <div class="admin-tab ${adminTab==='questions'?'active':''}" data-tab="questions">${esc(t('tab_questions'))}</div>
+      <div class="admin-tab ${adminTab==='attempts'?'active':''}" data-tab="attempts">${esc(t('tab_attempts'))}</div>
+    </div>
+    <div id="adminBody"></div>
+  </div>`;
+}
+
+function renderAdminRpRulesTab(){
+  return `
+  <div class="card">
+    <div class="field"><label class="field-label">${esc(t('rprules_ar'))}</label><textarea id="rpRulesAr" rows="14">${esc(config.rpRules.ar)}</textarea></div>
+    <div class="field"><label class="field-label">${esc(t('rprules_fr'))}</label><textarea id="rpRulesFr" rows="8">${esc(config.rpRules.fr)}</textarea></div>
+    <div class="field"><label class="field-label">${esc(t('rprules_en'))}</label><textarea id="rpRulesEn" rows="8">${esc(config.rpRules.en)}</textarea></div>
+    <button class="btn btn-primary" id="saveRpRulesBtn">${esc(t('save_btn'))}</button>
+  </div>`;
+}
+
+function renderAdminTermsTab(){
+  return `
+  <div class="card">
+    <div class="field"><label class="field-label">${esc(t('terms_ar'))}</label><textarea id="termsAr" rows="12">${esc(config.serverTerms.ar)}</textarea></div>
+    <div class="field"><label class="field-label">${esc(t('terms_fr'))}</label><textarea id="termsFr" rows="8">${esc(config.serverTerms.fr)}</textarea></div>
+    <div class="field"><label class="field-label">${esc(t('terms_en'))}</label><textarea id="termsEn" rows="8">${esc(config.serverTerms.en)}</textarea></div>
+    <button class="btn btn-primary" id="saveTermsBtn">${esc(t('save_btn'))}</button>
+  </div>`;
+}
+
+function renderAdminRulesTab(){
+  return `
+  <div class="card">
+    <div class="field"><label class="field-label">${esc(t('rules_ar'))}</label><textarea id="rulesAr" rows="6">${esc(config.rules.ar)}</textarea></div>
+    <div class="field"><label class="field-label">${esc(t('rules_fr'))}</label><textarea id="rulesFr" rows="6">${esc(config.rules.fr)}</textarea></div>
+    <div class="field"><label class="field-label">${esc(t('rules_en'))}</label><textarea id="rulesEn" rows="6">${esc(config.rules.en)}</textarea></div>
+    <div class="divider"></div>
+    <div class="field">
+      <label class="field-label">${esc(t('logo_label'))}</label>
+      <div style="display:flex;gap:14px;align-items:center;">
+        <img id="logoPreview" src="${esc(config.logoUrl||'')}" style="width:56px;height:56px;border-radius:14px;object-fit:cover;border:1px solid var(--border);background:var(--bg-deep);flex-shrink:0;" onerror="this.style.opacity=0.25;">
+        <input type="url" id="cfgLogo" value="${esc(config.logoUrl||'')}" placeholder="https://i.postimg.cc/..." style="flex:1;">
+      </div>
+    </div>
+    <div class="field"><label class="field-label">${esc(t('webhook_label'))}</label><input type="url" id="cfgWebhook" value="${esc(config.webhookUrl)}" placeholder="https://discord.com/api/webhooks/..."></div>
+    <div class="grid-2">
+      <div class="field"><label class="field-label">${esc(t('passmark_label'))}</label><input type="text" id="cfgPassmark" value="${config.passMark}"></div>
+      <div class="field"><label class="field-label">${esc(t('time_label'))}</label><input type="text" id="cfgTime" value="${config.totalTimeSeconds}"></div>
+    </div>
+    <div class="grid-2">
+      <div class="field"><label class="field-label">${esc(t('attempts_label'))}</label><input type="text" id="cfgAttempts" value="${config.maxAttempts}"></div>
+      <div class="field"><label class="field-label">${esc(t('cooldown_label'))}</label><input type="text" id="cfgCooldown" value="${config.cooldownHours}"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="field"><label class="field-label">${esc(t('change_pass_label'))}</label><input type="password" id="cfgNewPass" placeholder="••••••••"></div>
+    <button class="btn btn-primary" id="saveRulesBtn">${esc(t('save_btn'))}</button>
+  </div>`;
+}
+
+function renderAdminQuestionsTab(){
+  const editing = editingQuestionId ? questions.find(q=>q.id===editingQuestionId) : null;
+  return `
+  <div class="card">
+    <h3 style="margin-top:0;">${editing ? esc(t('edit_btn')) : esc(t('add_question'))}</h3>
+    <div class="field"><label class="field-label">${esc(t('q_text_label'))}</label><input type="text" id="newQText" value="${editing?esc(editing.text):''}"></div>
+    ${[0,1,2,3].map(i=>`
+      <div class="opt-input-row">
+        <input type="radio" name="newQCorrect" value="${i}" ${editing ? (editing.correct===i?'checked':'') : (i===0?'checked':'')}>
+        <input type="text" id="newQOpt${i}" placeholder="${esc(t('opt_label'))} ${i+1}" style="flex:1;" value="${editing?esc(editing.options[i]||''):''}">
+      </div>`).join('')}
+    <div class="helper-text">${esc(t('correct_label'))} = ${esc(t('correct_label'))}</div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-primary" id="saveQBtn">${editing ? esc(t('update_btn')) : esc(t('add_btn'))}</button>
+      ${editing ? `<button class="btn btn-ghost" id="cancelEditBtn">${esc(t('cancel_btn'))}</button>` : ''}
+    </div>
+  </div>
+  <div class="divider"></div>
+  <h3>${esc(t('existing_q'))} <span class="tag-pill">${questions.length}</span></h3>
+  ${questions.map((qq,i)=>`
+    <div class="q-admin-item">
+      <div class="row-between">
+        <div>
+          <div class="q-num">#${i+1}</div>
+          <div style="font-weight:700;">${esc(qq.text)}</div>
+          <div class="opts-mini">${qq.options.map((o,oi)=>oi===qq.correct?`<b>✓ ${esc(o)}</b>`:esc(o)).join(' &nbsp;•&nbsp; ')}</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <button class="btn btn-ghost btn-sm" data-edit="${qq.id}">${esc(t('edit_btn'))}</button>
+          <button class="btn btn-danger btn-sm" data-del="${qq.id}">${esc(t('delete_btn'))}</button>
+        </div>
+      </div>
+    </div>`).join('')}
+  `;
+}
+
+function renderAdminAttemptsTab(list){
+  if(!list.length) return `<div class="card">${esc(t('no_attempts'))}</div>`;
+  const now = Date.now();
+  return `<div class="card">${list.map(item=>{
+    const id = item.key.replace('attempt:','');
+    const locked = item.data.lockedUntil && item.data.lockedUntil > now;
+    return `<div class="q-admin-item">
+      <div class="row-between">
+        <div>
+          <div style="font-family:var(--font-mono);font-weight:700;">${esc(id)}</div>
+          <div class="opts-mini">${item.data.failCount||0} ${esc(t('fails_word'))}</div>
+        </div>
+        <div class="tag-pill" style="color:${locked?'var(--danger)':'var(--success)'}">${locked ? esc(t('locked_tag')) : esc(t('active_tag'))}</div>
+      </div>
+      ${locked ? `<div class="opts-mini">${esc(t('until_word'))} ${new Date(item.data.lockedUntil).toLocaleString()}</div>` : ''}
+    </div>`;
+  }).join('')}</div>`;
+}
+
+/* ============================= RENDER DISPATCH ============================= */
+async function render(){
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', T[lang].dir);
+  let body = '';
+  if(screen === 'home') body = renderHome();
+  else if(screen === 'rpRules') body = renderRpRulesPage();
+  else if(screen === 'serverTerms') body = renderServerTermsPage();
+  else if(screen === 'rules') body = renderRules();
+  else if(screen === 'quiz') body = renderQuiz();
+  else if(screen === 'result') body = renderResult();
+  else if(screen === 'info') body = renderInfoForm();
+  else if(screen === 'adminLogin') body = renderAdminLogin();
+  else if(screen === 'adminPanel') body = renderAdminPanel();
+
+  app.innerHTML = renderTopbar() + `<main>${body}</main>`;
+  attachGlobalHandlers();
+  await attachScreenHandlers();
+}
+
+/* ============================= HANDLERS ============================= */
+function attachGlobalHandlers(){
+  document.querySelectorAll('.lang-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ lang = btn.dataset.lang; render(); });
+  });
+  const gear = document.getElementById('adminGearBtn');
+  if(gear) gear.addEventListener('click', ()=>{
+    if(screen==='quiz') return; // don't allow leaving mid-quiz via gear
+    screen = adminAuthed ? 'adminPanel' : 'adminLogin';
+    render();
+  });
+}
+
+async function attachScreenHandlers(){
+  if(screen === 'home'){
+    document.getElementById('startBtn').addEventListener('click', ()=>{ screen='rules'; render(); });
+    document.getElementById('rpRulesBtn').addEventListener('click', ()=>{ screen='rpRules'; render(); });
+    document.getElementById('serverTermsBtn').addEventListener('click', ()=>{ screen='serverTerms'; render(); });
+  }
+
+  else if(screen === 'rpRules' || screen === 'serverTerms'){
+    document.getElementById('infoPageBackBtn').addEventListener('click', ()=>{ screen='home'; render(); });
+  }
+
+  else if(screen === 'rules'){
+    const discordInput = document.getElementById('discordIdInput');
+    const agreeCheck = document.getElementById('agreeCheck');
+    const startBtn = document.getElementById('agreeStartBtn');
+    const lockArea = document.getElementById('lockArea');
+
+    function refreshBtn(){
+      startBtn.disabled = !(agreeCheck.checked && discordInput.value.trim().length>3);
+    }
+    discordInput.addEventListener('input', ()=>{ discordId = discordInput.value.trim(); refreshBtn(); });
+    agreeCheck.addEventListener('change', refreshBtn);
+
+    startBtn.addEventListener('click', async ()=>{
+      discordId = discordInput.value.trim();
+      if(!discordId){ showToast(t('need_discord_id')); return; }
+      const att = await getAttempt(discordId);
+      if(att.passed){
+        lockArea.innerHTML = `<div class="lock-banner">✅ <b>${esc(t('already_applied_title'))}</b><br>${esc(t('already_applied_msg'))}</div>`;
+        startBtn.style.display='none';
+        agreeCheck.closest('.agree-row').style.display='none';
+        return;
+      }
+      const now = Date.now();
+      if(att.lockedUntil && att.lockedUntil > now){
+        const remain = att.lockedUntil - now;
+        const h = Math.floor(remain/3600000), m = Math.floor((remain%3600000)/60000);
+        lockArea.innerHTML = `<div class="lock-banner">⏳ ${esc(t('locked_msg'))} ${h}${lang==='ar'?'س':'h'} ${m}${lang==='ar'?'د':'m'} ${esc(t('locked_msg2'))}</div>`;
+        startBtn.style.display='none';
+        return;
+      }
+      await beginQuiz();
+    });
+  }
+
+  else if(screen === 'quiz'){
+    document.querySelectorAll('.q-card input[type=radio]').forEach(r=>{
+      r.addEventListener('change', (e)=>{
+        const card = e.target.closest('.q-card');
+        const qid = card.dataset.qid;
+        selected[qid] = parseInt(e.target.value,10);
+        if(skippedId === qid){ skippedId = null; skipUsed = false; }
+        if(allQuestionsAnswered()){ finishQuiz('normal'); return; }
+        render();
+      });
+    });
+    document.querySelectorAll('.skip-btn').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        const qid = e.target.dataset.qid;
+        if(skippedId === qid){ skippedId = null; skipUsed = false; }
+        else if(!skipUsed){ skippedId = qid; skipUsed = true; delete selected[qid]; }
+        if(allQuestionsAnswered()){ finishQuiz('normal'); return; }
+        render();
+      });
+    });
+    document.getElementById('submitQuizBtn').addEventListener('click', ()=>{
+      if(!confirm(t('confirm_submit'))) return;
+      finishQuiz('normal');
+    });
+  }
+
+  else if(screen === 'result'){
+    if(lastPass){
+      document.getElementById('toInfoBtn').addEventListener('click', ()=>{ screen='info'; render(); });
+    } else {
+      const att = await getAttempt(discordId);
+      const now = Date.now();
+      const area = document.getElementById('retryArea');
+      if(att.lockedUntil && att.lockedUntil > now){
+        const remain = att.lockedUntil - now;
+        const h = Math.floor(remain/3600000), m = Math.floor((remain%3600000)/60000);
+        area.innerHTML = `<div class="lock-banner">⏳ ${esc(t('locked_msg'))} ${h}${lang==='ar'?'س':'h'} ${m}${lang==='ar'?'د':'m'} ${esc(t('locked_msg2'))}</div>
+        <button class="btn btn-ghost" style="margin-top:16px;" id="backHomeBtn">${esc(t('back_home'))}</button>`;
+        document.getElementById('backHomeBtn').addEventListener('click', ()=>{ screen='home'; render(); });
+      } else {
+        area.innerHTML = `<button class="btn btn-primary" id="retryBtn">${esc(t('retry_btn'))}</button>
+        <button class="btn btn-ghost" style="margin-top:12px;" id="backHomeBtn2">${esc(t('back_home'))}</button>`;
+        document.getElementById('retryBtn').addEventListener('click', ()=>{ screen='rules'; render(); });
+        document.getElementById('backHomeBtn2').addEventListener('click', ()=>{ screen='home'; render(); });
+      }
+    }
+  }
+
+  else if(screen === 'info'){
+    document.getElementById('sendInfoBtn').addEventListener('click', async ()=>{
+      const fname = document.getElementById('fFname').value.trim();
+      const lname = document.getElementById('fLname').value.trim();
+      const bdate = document.getElementById('fBdate').value;
+      const dsc = document.getElementById('fDiscord').value.trim();
+      const steam = document.getElementById('fSteam').value.trim();
+      const statusEl = document.getElementById('sendStatus');
+      if(!fname || !lname || !bdate || !dsc || !steam){
+        statusEl.innerHTML = `<div class="warn-banner">${esc(t('need_all_fields'))}</div>`;
+        return;
+      }
+      statusEl.innerHTML = `<div class="helper-text">${esc(t('loading'))}</div>`;
+      const ok = await sendToDiscord({fname,lname,bdate,dsc,steam});
+      if(ok){
+        statusEl.innerHTML = `<div class="lock-banner" style="border-color:rgba(47,212,153,0.4);color:var(--success);background:rgba(47,212,153,0.1);">✅ ${esc(t('sent_ok'))}</div>`;
+        await setAttempt(discordId, {failCount:0, lockedUntil:0, passed:true});
+      } else {
+        statusEl.innerHTML = `<div class="warn-banner">${esc(t('sent_fail'))}</div>`;
+      }
+    });
+  }
+
+  else if(screen === 'adminLogin'){
+    document.getElementById('adminBackBtn').addEventListener('click', ()=>{ screen='home'; render(); });
+    document.getElementById('adminLoginBtn').addEventListener('click', async ()=>{
+      const pass = document.getElementById('adminPassInput').value;
+      const hash = await sha256(pass);
+      if(hash === config.adminPassHash){
+        adminAuthed = true;
+        screen = 'adminPanel';
+        render();
+      } else {
+        document.getElementById('adminLoginErr').textContent = t('admin_wrong_pass');
+      }
+    });
+  }
+
+  else if(screen === 'adminPanel'){
+    document.getElementById('adminLogoutBtn').addEventListener('click', ()=>{
+      adminAuthed = false; screen='home'; render();
+    });
+    document.querySelectorAll('.admin-tab').forEach(tab=>{
+      tab.addEventListener('click', ()=>{ adminTab = tab.dataset.tab; render(); });
+    });
+    const bodyEl = document.getElementById('adminBody');
+    if(adminTab === 'rules'){
+      bodyEl.innerHTML = renderAdminRulesTab();
+      document.getElementById('cfgLogo').addEventListener('input', (e)=>{
+        document.getElementById('logoPreview').src = e.target.value.trim();
+      });
+      document.getElementById('saveRulesBtn').addEventListener('click', async ()=>{
+        config.rules.ar = document.getElementById('rulesAr').value;
+        config.rules.fr = document.getElementById('rulesFr').value;
+        config.rules.en = document.getElementById('rulesEn').value;
+        config.webhookUrl = document.getElementById('cfgWebhook').value.trim();
+        config.logoUrl = document.getElementById('cfgLogo').value.trim();
+        config.passMark = parseInt(document.getElementById('cfgPassmark').value,10) || 17;
+        config.totalTimeSeconds = parseInt(document.getElementById('cfgTime').value,10) || 120;
+        config.maxAttempts = parseInt(document.getElementById('cfgAttempts').value,10) || 3;
+        config.cooldownHours = parseFloat(document.getElementById('cfgCooldown').value) || 24;
+        const newPass = document.getElementById('cfgNewPass').value;
+        if(newPass && newPass.trim().length>0){
+          config.adminPassHash = await sha256(newPass.trim());
+        }
+        await saveConfig();
+        showToast(t('saved_toast'));
+      });
+    } else if(adminTab === 'rprules'){
+      bodyEl.innerHTML = renderAdminRpRulesTab();
+      document.getElementById('saveRpRulesBtn').addEventListener('click', async ()=>{
+        config.rpRules.ar = document.getElementById('rpRulesAr').value;
+        config.rpRules.fr = document.getElementById('rpRulesFr').value;
+        config.rpRules.en = document.getElementById('rpRulesEn').value;
+        await saveConfig();
+        showToast(t('saved_toast'));
+      });
+    } else if(adminTab === 'terms'){
+      bodyEl.innerHTML = renderAdminTermsTab();
+      document.getElementById('saveTermsBtn').addEventListener('click', async ()=>{
+        config.serverTerms.ar = document.getElementById('termsAr').value;
+        config.serverTerms.fr = document.getElementById('termsFr').value;
+        config.serverTerms.en = document.getElementById('termsEn').value;
+        await saveConfig();
+        showToast(t('saved_toast'));
+      });
+    } else if(adminTab === 'questions'){
+      bodyEl.innerHTML = renderAdminQuestionsTab();
+      document.getElementById('saveQBtn').addEventListener('click', async ()=>{
+        const text = document.getElementById('newQText').value.trim();
+        const opts = [0,1,2,3].map(i=>document.getElementById('newQOpt'+i).value.trim());
+        const correctRadio = document.querySelector('input[name=newQCorrect]:checked');
+        const correct = correctRadio ? parseInt(correctRadio.value,10) : 0;
+        if(!text || opts.some(o=>!o)){ showToast(t('need_all_fields')); return; }
+        if(editingQuestionId){
+          const idx = questions.findIndex(qq=>qq.id===editingQuestionId);
+          if(idx>=0) questions[idx] = {id:editingQuestionId, text, options:opts, correct};
+          editingQuestionId = null;
+        } else {
+          questions.push({id:cryptoId(), text, options:opts, correct});
+        }
+        await saveQuestions();
+        showToast(t('saved_toast'));
+        render();
+      });
+      const cancelBtn = document.getElementById('cancelEditBtn');
+      if(cancelBtn) cancelBtn.addEventListener('click', ()=>{ editingQuestionId=null; render(); });
+      document.querySelectorAll('[data-edit]').forEach(b=>{
+        b.addEventListener('click', ()=>{ editingQuestionId = b.dataset.edit; render(); });
+      });
+      document.querySelectorAll('[data-del]').forEach(b=>{
+        b.addEventListener('click', async ()=>{
+          questions = questions.filter(qq=>qq.id!==b.dataset.del);
+          await saveQuestions();
+          render();
+        });
+      });
+    } else if(adminTab === 'attempts'){
+      bodyEl.innerHTML = `<div class="helper-text">${esc(t('loading'))}</div>`;
+      const list = await listAllAttempts();
+      bodyEl.innerHTML = renderAdminAttemptsTab(list);
+    }
+  }
+}
+
+/* ============================= QUIZ LOGIC ============================= */
+function shuffleQuestionOptions(qq){
+  const order = shuffle([0,1,2,3]); // order[newPos] = oldIndex
+  const newOptions = order.map(oldIdx => qq.options[oldIdx]);
+  const newCorrect = order.indexOf(qq.correct);
+  return { id: qq.id, text: qq.text, options: newOptions, correct: newCorrect };
+}
+
+function allQuestionsAnswered(){
+  return quizSet.every(qq => selected[qq.id] !== undefined || skippedId === qq.id);
+}
+
+async function beginQuiz(){
+  const count = Math.min(20, questions.length);
+  quizSet = shuffle(questions).slice(0, count).map(shuffleQuestionOptions);
+  selected = {};
+  skippedId = null;
+  skipUsed = false;
+  timeLeft = config.totalTimeSeconds;
+  screen = 'quiz';
+  await render();
+  startTimer();
+  enableCheatGuard();
+}
+
+function startTimer(){
+  clearInterval(timerHandle);
+  timerHandle = setInterval(()=>{
+    timeLeft--;
+    const timerEl = document.querySelector('.timer');
+    if(timerEl){
+      timerEl.textContent = fmtTime(Math.max(timeLeft,0));
+      timerEl.classList.toggle('low', timeLeft<=15);
+    }
+    if(timeLeft<=0){
+      clearInterval(timerHandle);
+      finishQuiz('timeout');
+    }
+  }, 1000);
+}
+
+function enableCheatGuard(){
+  cheatGuardActive = true;
+}
+function disableCheatGuard(){
+  cheatGuardActive = false;
+}
+document.addEventListener('visibilitychange', ()=>{
+  if(cheatGuardActive && document.hidden && screen==='quiz'){
+    finishQuiz('cheat');
+  }
+});
+window.addEventListener('blur', ()=>{
+  if(cheatGuardActive && screen==='quiz'){
+    finishQuiz('cheat');
+  }
+});
+
+async function finishQuiz(reason){
+  clearInterval(timerHandle);
+  disableCheatGuard();
+  let score = 0;
+  if(reason !== 'cheat'){
+    quizSet.forEach(qq=>{
+      if(skippedId === qq.id){ score++; return; } // free pass counts as correct
+      if(selected[qq.id] === qq.correct) score++;
+    });
+  }
+  lastScore = score;
+  lastReason = reason;
+  lastPass = reason !== 'cheat' && score >= (config.passMark||17);
+
+  const att = await getAttempt(discordId);
+  if(!lastPass){
+    att.failCount = (att.failCount||0) + 1;
+    if(att.failCount >= (config.maxAttempts||3)){
+      att.lockedUntil = Date.now() + (config.cooldownHours||24)*3600000;
+      att.failCount = 0;
+    }
+    await setAttempt(discordId, att);
+  }
+
+  screen = 'result';
+  render();
+}
+
+/* ============================= DISCORD WEBHOOK ============================= */
+async function sendToDiscord(info){
+  if(!config.webhookUrl){ return false; }
+
+  const payload = {
+    username: 'Dz Complex RP — Interview Bot',
+    embeds: [{
+      title: lastPass ? '✅ New Application — PASSED' : '❌ New Application — FAILED',
+      color: lastPass ? 0x2fd499 : 0xff5470,
+      fields: [
+        { name: 'Name', value: `${info.fname} ${info.lname}`, inline: true },
+        { name: 'Date of birth', value: info.bdate, inline: true },
+        { name: 'Discord ID', value: info.dsc, inline: true },
+        { name: 'Steam profile', value: info.steam, inline: false },
+        { name: 'Score', value: `${lastScore}/20`, inline: true },
+        { name: 'Result', value: lastPass ? 'PASSED ✅' : 'FAILED ❌', inline: true }
+      ],
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  try{
+    const res = await fetch(config.webhookUrl, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    return res.ok;
+  }catch(e){
+    console.error('Discord webhook error', e);
+    return false;
+  }
+}
+
+/* ============================= INIT ============================= */
+async function main(){
+  await initConfig();
+  await initQuestions();
+  await render();
+}
+main();
+
+})();
+</script>
+</body>
+</html>
