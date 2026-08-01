@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="ltr">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DZ Complex RP — FiveM Whitelist</title>
-<meta name="description" content="Server FiveM DZ Complex RP: whitelist, Discord w connect.">
+<meta name="description" content="DZ Complex RP FiveM server: whitelist application, Discord and server connect.">
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,6 +39,8 @@ header{position:sticky;top:0;z-index:20;background:var(--glass);border-bottom:1p
 .btn:hover{border-color:var(--blue2);transform:translateY(-1px)}
 .btn.primary{background:linear-gradient(135deg,var(--blue),#6366f1);border-color:transparent;color:#fff;
   box-shadow:0 14px 40px -16px rgba(59,130,246,.9)}
+.btn.discord{background:linear-gradient(135deg,#5865F2,#4752c4);border-color:transparent;color:#fff;
+  box-shadow:0 14px 40px -16px rgba(88,101,242,.9)}
 .panel{background:linear-gradient(140deg,rgba(255,255,255,.10),rgba(59,130,246,.12));border:1px solid var(--line);
   border-radius:18px;padding:24px;backdrop-filter:blur(18px) saturate(140%);
   box-shadow:0 24px 60px -28px rgba(59,130,246,.65), inset 0 1px 0 rgba(255,255,255,.22);margin-bottom:26px}
@@ -62,19 +64,56 @@ legend{font-size:18px;font-weight:600;margin-bottom:8px}
 .divider{height:1px;background:linear-gradient(135deg,var(--blue2),#818cf8);opacity:.55;margin:14px 0 18px}
 footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var(--muted);font-size:13px}
 .center{text-align:center}
-.hide{display:none}
+.hide{display:none!important}
 .big{font-size:22px;text-transform:uppercase;margin:10px 0}
 .count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
+.err{color:#fca5a5;font-size:13px;margin-top:8px;min-height:18px}
+
+/* ===== Login gate ===== */
+#gate{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;
+  background:rgba(6,10,26,.86);backdrop-filter:blur(10px)}
+#gate .card{max-width:460px;width:100%;text-align:center}
+#gate img.logo{width:120px;height:120px;object-fit:contain;filter:drop-shadow(0 0 26px rgba(59,130,246,.8))}
+#gate h2{margin:14px 0 6px;text-transform:uppercase;font-size:26px}
+.orline{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px;text-transform:uppercase;margin:18px 0}
+.orline:before,.orline:after{content:"";flex:1;height:1px;background:var(--line)}
+.identity{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
 </style>
 </head>
 <body>
+
+<!-- ===================== LOGIN GATE ===================== -->
+<div id="gate">
+  <div class="panel card">
+    <img class="logo" src="logo.png" alt="DZ Complex RP logo">
+    <h2>Sign in to continue</h2>
+    <p class="sub">Verify your identity before starting the whitelist application.</p>
+    <div class="divider"></div>
+
+    <button class="btn discord" id="discordLogin" type="button" style="width:100%;justify-content:center;padding:13px">
+      Login with Discord
+    </button>
+
+    <div class="orline">or</div>
+
+    <div style="text-align:left">
+      <label for="steamLink">Steam profile link</label>
+      <input id="steamLink" placeholder="https://steamcommunity.com/id/yourname" autocomplete="url">
+      <div class="hint">Open Steam &rarr; your profile &rarr; copy the page URL. Example: https://steamcommunity.com/profiles/76561198000000000</div>
+      <button class="btn primary" id="steamLogin" type="button" style="width:100%;justify-content:center;padding:12px">Continue with Steam</button>
+      <div class="err" id="gateErr"></div>
+    </div>
+  </div>
+</div>
+
 <header>
   <div class="hrow">
     <div class="brandbox">
-      <img src="logo.png" alt="Logo DZ Complex RP">
-      <div><div class="brand">DZ Complex RP</div><div class="sub">Whitelist Serious RP</div></div>
+      <img src="logo.png" alt="DZ Complex RP logo">
+      <div><div class="brand">DZ Complex RP</div><div class="sub">Serious RP Whitelist</div></div>
     </div>
     <div class="row" style="margin:0">
+      <span class="identity hide" id="whoami"></span>
       <a class="btn" href="https://discord.gg/cJpKmJnNuT" target="_blank" rel="noreferrer">Discord</a>
       <a class="btn primary" href="fivem://connect/192.35.206.54">Connect FiveM</a>
     </div>
@@ -88,7 +127,7 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
     <p class="lead">Please answer the Roleplay questions carefully. If you pass the whitelist exam, the Discord invite link and the server connect button will be unlocked. The staff team will also receive a notification in the designated Discord channel <span class="neon">#accepted</span>.</p>
     <div class="row">
       <button class="btn" id="copyIp" type="button">Copy IP</button>
-      <a class="btn primary" href="#form">ابدء طلب النضمام</a>
+      <a class="btn primary" href="#form">Start your application</a>
     </div>
   </section>
 
@@ -96,29 +135,29 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
 
   <form id="form" novalidate>
     <section class="panel">
-      <h2>1. معلومات شخصيتك</h2><div class="divider"></div>
+      <h2>1. Character information</h2><div class="divider"></div>
       <div class="grid3">
         <div><label for="discord">Discord (username)</label><input id="discord" required maxlength="60" placeholder="karim_rp"></div>
-        <div><label for="ic">اسم شخصيتك</label><input id="ic" required maxlength="60" placeholder="Karim Belhaj"></div>
+        <div><label for="ic">Character name</label><input id="ic" required maxlength="60" placeholder="Karim Belhaj"></div>
         <div><label for="age">Age</label><input id="age" type="number" required min="13" max="99" placeholder="18"></div>
       </div>
     </section>
 
     <section class="panel">
-      <h2>2. Questions RP</h2>
-      <p class="sub">اختر جواب واحد من بين الامثلة.</p>
+      <h2>2. RP Questions</h2>
+      <p class="sub">Choose one answer for each question.</p>
       <div class="divider"></div>
       <div id="mcq"></div>
     </section>
 
     <section class="panel">
-      <h2>3. RP HISTOIRE</h2><div class="divider"></div>
+      <h2>3. RP Story</h2><div class="divider"></div>
       <div id="open"></div>
     </section>
 
     <div class="center">
-      <button class="btn primary" type="submit" id="send" style="padding:14px 28px;font-size:17px">ارسال طلب الانضمام</button>
-      <p class="sub" style="margin-top:10px">Ba3d ma tsift, l'staff kaychouf f Discord.</p>
+      <button class="btn primary" type="submit" id="send" style="padding:14px 28px;font-size:17px">Submit application</button>
+      <p class="sub" style="margin-top:10px">After submitting, the staff team reviews your application on Discord.</p>
     </div>
   </form>
 </main>
@@ -126,12 +165,88 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
 <footer>DZ Complex RP — 192.35.206.54 · <a href="https://discord.gg/cJpKmJnNuT">Discord</a></footer>
 
 <script>
-/* ====== BDEL HNA: hott l'webhook dyal channel #accepted ======
+/* ====== CHANGE HERE: webhook of the #accepted channel ======
    Discord > Server Settings > Integrations > Webhooks > Copy Webhook URL   */
 const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1533035973250908220/lnTeSmxtE6R7NeS1YRIQ14XIVFOWGFNBTvPbs1pGeeRIMJFBL40k_8Yj63gfHgxzkz1A";
 const SERVER_IP = "192.35.206.54";
 const DISCORD_INVITE = "https://discord.gg/cJpKmJnNuT";
 
+/* ====== OPTIONAL: real Discord OAuth2 ======
+   Discord Developer Portal > your app > OAuth2 > put your Client ID below and
+   add this page URL as a Redirect URI. If left empty, the button asks for the
+   Discord username manually instead. */
+const DISCORD_CLIENT_ID = "";
+
+/* ===================== LOGIN GATE ===================== */
+const gate = document.getElementById("gate");
+const gateErr = document.getElementById("gateErr");
+const whoami = document.getElementById("whoami");
+const STORE_KEY = "dzcomplex_identity";
+
+function setIdentity(id){
+  try{ sessionStorage.setItem(STORE_KEY, JSON.stringify(id)); }catch(e){}
+  showApp(id);
+}
+function showApp(id){
+  gate.classList.add("hide");
+  whoami.classList.remove("hide");
+  whoami.textContent = (id.type === "discord" ? "Discord: " : "Steam: ") + id.value;
+  if(id.type === "discord"){
+    const d = document.getElementById("discord");
+    if(d && !d.value) d.value = id.value;
+  }
+}
+(function restore(){
+  try{
+    const raw = sessionStorage.getItem(STORE_KEY);
+    if(raw) showApp(JSON.parse(raw));
+  }catch(e){}
+})();
+
+/* Steam login */
+document.getElementById("steamLogin").addEventListener("click", ()=>{
+  const v = document.getElementById("steamLink").value.trim();
+  const ok = /^https?:\/\/(www\.)?steamcommunity\.com\/(id|profiles)\/[^\/\s]+\/?$/i.test(v);
+  if(!ok){ gateErr.textContent = "Please paste a valid Steam profile link (steamcommunity.com/id/... or /profiles/...)."; return; }
+  gateErr.textContent = "";
+  setIdentity({type:"steam", value:v});
+});
+document.getElementById("steamLink").addEventListener("keydown", e=>{
+  if(e.key === "Enter"){ e.preventDefault(); document.getElementById("steamLogin").click(); }
+});
+
+/* Discord login */
+document.getElementById("discordLogin").addEventListener("click", ()=>{
+  if(DISCORD_CLIENT_ID){
+    const redirect = encodeURIComponent(location.origin + location.pathname);
+    location.href = "https://discord.com/oauth2/authorize?client_id=" + DISCORD_CLIENT_ID +
+      "&response_type=token&scope=identify&redirect_uri=" + redirect;
+    return;
+  }
+  const name = prompt("Enter your Discord username:");
+  if(!name || name.trim().length < 2){ gateErr.textContent = "Discord username is required."; return; }
+  gateErr.textContent = "";
+  setIdentity({type:"discord", value:name.trim()});
+});
+
+/* Handle Discord OAuth callback (#access_token=...) */
+(async function oauthCallback(){
+  if(!location.hash.includes("access_token")) return;
+  const token = new URLSearchParams(location.hash.slice(1)).get("access_token");
+  history.replaceState(null, "", location.pathname);
+  if(!token) return;
+  try{
+    const res = await fetch("https://discord.com/api/users/@me", {headers:{Authorization:"Bearer " + token}});
+    if(!res.ok) throw new Error("Discord API error " + res.status);
+    const user = await res.json();
+    setIdentity({type:"discord", value:user.username});
+  }catch(err){
+    console.error(err);
+    gateErr.textContent = "Discord login failed. Please try again or use your Steam link.";
+  }
+})();
+
+/* ===================== WHITELIST FORM ===================== */
 const MCQ = [
  {id:"rp_meta",q:"ما هي « Metagaming » f RP ?",correct:0,
   hint:"Mital: chefti f stream fin kayn l'voleur mn ba3d dazti nichan 3lih = metagaming (memnou3).",
@@ -166,26 +281,26 @@ document.getElementById("open").innerHTML = OPEN.map(q=>`
  <div style="margin-bottom:22px">
   <label for="${q.id}">${esc(q.label)}</label>
   <div class="hint">${esc(q.example)}</div>
-  <textarea id="${q.id}" rows="5" maxlength="4000" placeholder="اكتب هنا..."></textarea>
-  <div class="count"><span id="c_${q.id}">0</span>/${q.min} 7erf minimum</div>
+  <textarea id="${q.id}" rows="5" maxlength="4000" placeholder="Write your answer here..."></textarea>
+  <div class="count"><span id="c_${q.id}">0</span>/${q.min} characters minimum</div>
  </div>`).join("");
 OPEN.forEach(q=>{
   const t=document.getElementById(q.id);
   t.addEventListener("input",()=>{document.getElementById("c_"+q.id).textContent=t.value.trim().length;});
 });
 
-document.getElementById("copyIp").onclick=()=>{navigator.clipboard.writeText(SERVER_IP);alert("IP tcopya: "+SERVER_IP);};
+document.getElementById("copyIp").onclick=()=>{navigator.clipboard.writeText(SERVER_IP);alert("IP copied: "+SERVER_IP);};
 
 document.getElementById("form").addEventListener("submit", async (e)=>{
   e.preventDefault();
   const discord=document.getElementById("discord").value.trim();
   const ic=document.getElementById("ic").value.trim();
   const age=parseInt(document.getElementById("age").value,10);
-  if(discord.length<2||ic.length<3||!(age>=13&&age<=99)){alert("Kemmel معلومات شخصيتك (Discord, Name, Age 13+).");return;}
+  if(discord.length<2||ic.length<3||!(age>=13&&age<=99)){alert("Please complete your character information (Discord, name, age 13+).");return;}
   const mcqAns={};
   for(const q of MCQ){
     const el=document.querySelector(`input[name="${q.id}"]:checked`);
-    if(!el){alert("Jaweb 3la ga3 les questions RP.");return;}
+    if(!el){alert("Please answer all the RP questions.");return;}
     mcqAns[q.id]=parseInt(el.value,10);
   }
   const wrong=MCQ.filter(q=>mcqAns[q.id]!==q.correct);
@@ -193,7 +308,10 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
   const accepted = wrong.length===0 && tooShort.length===0;
   const score = MCQ.length - wrong.length;
 
-  const btn=document.getElementById("send"); btn.disabled=true; btn.textContent="Kansiftou...";
+  let identity={type:"—",value:"—"};
+  try{ identity = JSON.parse(sessionStorage.getItem(STORE_KEY)) || identity; }catch(e){}
+
+  const btn=document.getElementById("send"); btn.disabled=true; btn.textContent="Sending...";
   if(DISCORD_WEBHOOK_URL.startsWith("https://")){
     try{
       await fetch(DISCORD_WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},
@@ -205,23 +323,24 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
             {name:"Name",value:ic,inline:true},
             {name:"Age",value:String(age),inline:true},
             {name:"Score RP",value:score+"/"+MCQ.length,inline:true},
+            {name:"Verified with",value:identity.type+": "+identity.value,inline:false},
             ...OPEN.map(q=>({name:q.label,value:(document.getElementById(q.id).value.trim()||"—").slice(0,1000)}))
           ],
           timestamp:new Date().toISOString()
         }]})});
     }catch(err){console.error(err);}
   }
-  btn.disabled=false; btn.textContent="ارسال طلب الانضمام";
+  btn.disabled=false; btn.textContent="Submit application";
 
   const r=document.getElementById("result"); r.classList.remove("hide");
   r.innerHTML = accepted
-   ? `<h2 class="big neon">لقد نجحت في الانضمام !</h2>
-      <p class="sub">Score: ${score}/${MCQ.length}. L'candidature dyalek tsiftat l channel <b>#accepted</b>.</p>
+   ? `<h2 class="big neon">You passed the whitelist!</h2>
+      <p class="sub">Score: ${score}/${MCQ.length}. Your application was sent to the <b>#accepted</b> channel.</p>
       <div class="row"><a class="btn primary" href="fivem://connect/${SERVER_IP}">Connect FiveM</a>
-      <a class="btn" href="${DISCORD_INVITE}" target="_blank" rel="noreferrer">Dxol l Discord</a></div>
+      <a class="btn" href="${DISCORD_INVITE}" target="_blank" rel="noreferrer">Join Discord</a></div>
       <p class="brand" style="letter-spacing:.3em;margin-top:14px">${SERVER_IP}</p>`
-   : `<h2 class="big">Machi daba, 3awd jarreb</h2>
-      <p class="sub">Score questions RP: ${score}/${MCQ.length}.${tooShort.length?" Jwabat qsira bzaf: "+tooShort.map(q=>esc(q.label)).join(", ")+".":""}</p>`;
+   : `<h2 class="big">Not this time, try again</h2>
+      <p class="sub">RP questions score: ${score}/${MCQ.length}.${tooShort.length?" Answers too short: "+tooShort.map(q=>esc(q.label)).join(", ")+".":""}</p>`;
   window.scrollTo({top:0,behavior:"smooth"});
 });
 </script>
