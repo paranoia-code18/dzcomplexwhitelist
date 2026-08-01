@@ -100,6 +100,9 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
       <label for="steamLink">Steam profile link</label>
       <input id="steamLink" placeholder="https://steamcommunity.com/id/yourname" autocomplete="url">
       <div class="hint">Open Steam &rarr; your profile &rarr; copy the page URL. Example: https://steamcommunity.com/profiles/76561198000000000</div>
+      <label for="steamDiscordId">Discord User ID</label>
+      <input id="steamDiscordId" inputmode="numeric" placeholder="123456789012345678">
+      <div class="hint">Discord &rarr; Settings &rarr; Advanced &rarr; enable <b>Developer Mode</b>, then right-click your name &rarr; <b>Copy User ID</b>. This is required so the staff can tag you and give the whitelist role.</div>
       <button class="btn primary" id="steamLogin" type="button" style="width:100%;justify-content:center;padding:12px">Continue with Steam</button>
       <div class="err" id="gateErr"></div>
     </div>
@@ -175,7 +178,7 @@ const DISCORD_INVITE = "https://discord.gg/cJpKmJnNuT";
    Discord Developer Portal > your app > OAuth2 > put your Client ID below and
    add this page URL as a Redirect URI. If left empty, the button asks for the
    Discord username manually instead. */
-const DISCORD_CLIENT_ID = "";
+const DISCORD_CLIENT_ID = "1533067978810200174";
 
 /* ===================== LOGIN GATE ===================== */
 const gate = document.getElementById("gate");
@@ -208,8 +211,13 @@ document.getElementById("steamLogin").addEventListener("click", ()=>{
   const v = document.getElementById("steamLink").value.trim();
   const ok = /^https?:\/\/(www\.)?steamcommunity\.com\/(id|profiles)\/[^\/\s]+\/?$/i.test(v);
   if(!ok){ gateErr.textContent = "Please paste a valid Steam profile link (steamcommunity.com/id/... or /profiles/...)."; return; }
+  const rawId = document.getElementById("steamDiscordId").value.trim();
+  if(!/^\d{15,25}$/.test(rawId)){ gateErr.textContent = "Please enter a valid Discord User ID (17-19 digits). Enable Developer Mode in Discord, then right-click your name > Copy User ID."; return; }
   gateErr.textContent = "";
-  setIdentity({type:"steam", value:v});
+  setIdentity({type:"steam", value:v, id:rawId});
+});
+document.getElementById("steamDiscordId").addEventListener("keydown", e=>{
+  if(e.key === "Enter"){ e.preventDefault(); document.getElementById("steamLogin").click(); }
 });
 document.getElementById("steamLink").addEventListener("keydown", e=>{
   if(e.key === "Enter"){ e.preventDefault(); document.getElementById("steamLogin").click(); }
@@ -239,7 +247,7 @@ document.getElementById("discordLogin").addEventListener("click", ()=>{
     const res = await fetch("https://discord.com/api/users/@me", {headers:{Authorization:"Bearer " + token}});
     if(!res.ok) throw new Error("Discord API error " + res.status);
     const user = await res.json();
-    setIdentity({type:"discord", value:user.username});
+    setIdentity({type:"discord", value:user.username, id:user.id});
   }catch(err){
     console.error(err);
     gateErr.textContent = "Discord login failed. Please try again or use your Steam link.";
@@ -311,23 +319,36 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
   let identity={type:"—",value:"—"};
   try{ identity = JSON.parse(sessionStorage.getItem(STORE_KEY)) || identity; }catch(e){}
 
+  /* Discord ID -> clickable mention + profile link for the staff */
+  const did = identity && identity.id ? String(identity.id) : "";
+  const discordField = did
+    ? "<@" + did + ">\n`" + discord + "`\n[Open profile](https://discord.com/users/" + did + ")"
+    : discord;
+  const verifiedField = did
+    ? (identity.type === "steam"
+        ? "steam: " + identity.value + "\ndiscord: <@" + did + "> (ID: " + did + ")"
+        : "discord: <@" + did + "> (`" + identity.value + "` — ID: " + did + ")")
+    : identity.type + ": " + identity.value;
+
   const btn=document.getElementById("send"); btn.disabled=true; btn.textContent="Sending...";
   if(DISCORD_WEBHOOK_URL.startsWith("https://")){
     try{
       await fetch(DISCORD_WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({username:"DZ Complex RP — Whitelist",embeds:[{
+        body:JSON.stringify({username:"DZ Complex RP — Whitelist",allowed_mentions:{parse:[]},embeds:[{
           title: accepted ? "✅ ACCEPTED — Whitelist" : "❌ REFUSED — Whitelist",
           color: accepted ? 0x3b82f6 : 0xef4444,
           fields:[
-            {name:"Discord",value:discord,inline:true},
+            {name:"Discord",value:discordField,inline:true},
             {name:"Name",value:ic,inline:true},
             {name:"Age",value:String(age),inline:true},
             {name:"Score RP",value:score+"/"+MCQ.length,inline:true},
-            {name:"Verified with",value:identity.type+": "+identity.value,inline:false},
+            {name:"Verified with",value:verifiedField,inline:false},
             ...OPEN.map(q=>({name:q.label,value:(document.getElementById(q.id).value.trim()||"—").slice(0,1000)}))
           ],
           timestamp:new Date().toISOString()
-        }]})});
+        }],
+        content: did ? (accepted ? "✅ <@" + did + "> — click the tag to open the profile and give the whitelist role." : "❌ <@" + did + ">") : undefined
+        })});
     }catch(err){console.error(err);}
   }
   btn.disabled=false; btn.textContent="Submit application";
