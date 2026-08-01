@@ -1,260 +1,229 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="ltr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DZ COMPLEX ROLEPLAY</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DZ Complex RP — FiveM Whitelist</title>
+<meta name="description" content="Server FiveM DZ Complex RP: whitelist, Discord w connect.">
+<link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+:root{
+  --bg:#0a1024; --fg:#eef2ff; --muted:#a8b4dd; --blue:#3b82f6; --blue2:#60a5fa;
+  --glass:rgba(255,255,255,.08); --line:rgba(255,255,255,.16);
 }
-
-body{
-background:#090b12;
-background-image:radial-gradient(circle at top,#0d4d8f 0%,#090b12 60%);
-color:white;
-overflow-x:hidden;
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Barlow,system-ui,sans-serif;
+  background-image:
+    radial-gradient(900px 520px at 20% -10%, rgba(59,130,246,.35), transparent),
+    radial-gradient(800px 520px at 85% 8%, rgba(99,102,241,.30), transparent),
+    linear-gradient(rgba(96,165,250,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(96,165,250,.08) 1px, transparent 1px);
+  background-size:100% 100%,100% 100%,46px 46px,46px 46px;
+  background-attachment:fixed,fixed,scroll,scroll;
 }
-
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 8%;
-position:fixed;
-width:100%;
-backdrop-filter:blur(18px);
-background:rgba(255,255,255,.05);
-border-bottom:1px solid rgba(255,255,255,.1);
-z-index:999;
-}
-
-.logo{
-font-size:28px;
-font-weight:700;
-color:#43b7ff;
-}
-
-nav ul{
-display:flex;
-list-style:none;
-gap:25px;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-transition:.3s;
-}
-
-nav a:hover{
-color:#43b7ff;
-}
-
-.hero{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-}
-
-.card{
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.15);
-border-radius:25px;
-padding:50px;
-max-width:800px;
-box-shadow:0 0 35px rgba(0,162,255,.25);
-}
-
-.card img{
-width:180px;
-margin-bottom:25px;
-}
-
-h1{
-font-size:55px;
-color:#43b7ff;
-}
-
-p{
-margin-top:15px;
-color:#d7d7d7;
-line-height:1.8;
-}
-
-.buttons{
-margin-top:40px;
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:15px 35px;
-border-radius:40px;
-text-decoration:none;
-font-weight:600;
-transition:.3s;
-}
-
-.blue{
-background:#0b8cff;
-color:white;
-}
-
-.blue:hover{
-box-shadow:0 0 25px #0b8cff;
-transform:translateY(-4px);
-}
-
-.glass{
-background:rgba(255,255,255,.08);
-color:white;
-border:1px solid rgba(255,255,255,.2);
-}
-
-.glass:hover{
-box-shadow:0 0 20px rgba(255,255,255,.2);
-transform:translateY(-4px);
-}
-
-section{
-padding:90px 10%;
-}
-
-.title{
-font-size:40px;
-margin-bottom:40px;
-color:#43b7ff;
-text-align:center;
-}
-
-.features{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.feature{
-background:rgba(255,255,255,.06);
-padding:30px;
-border-radius:20px;
-backdrop-filter:blur(15px);
-transition:.3s;
-}
-
-.feature:hover{
-transform:translateY(-8px);
-box-shadow:0 0 25px rgba(0,162,255,.3);
-}
-
-footer{
-padding:40px;
-text-align:center;
-color:#999;
-}
+h1,h2,h3,legend,.brand{font-family:Rajdhani,system-ui,sans-serif;letter-spacing:.03em}
+a{color:var(--blue2)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px 80px}
+header{position:sticky;top:0;z-index:20;background:var(--glass);border-bottom:1px solid var(--line);backdrop-filter:blur(16px) saturate(140%)}
+.hrow{max-width:1000px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brandbox{display:flex;align-items:center;gap:12px}
+.brandbox img{width:48px;height:48px;object-fit:contain;filter:drop-shadow(0 0 18px rgba(59,130,246,.75))}
+.brand{font-size:20px;font-weight:700;text-transform:uppercase;line-height:1}
+.sub{font-size:12px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:1px solid var(--line);
+  text-decoration:none;font-weight:600;cursor:pointer;font-family:Rajdhani,sans-serif;text-transform:uppercase;font-size:15px;
+  background:var(--glass);color:var(--fg);backdrop-filter:blur(10px);transition:.2s}
+.btn:hover{border-color:var(--blue2);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(135deg,var(--blue),#6366f1);border-color:transparent;color:#fff;
+  box-shadow:0 14px 40px -16px rgba(59,130,246,.9)}
+.panel{background:linear-gradient(140deg,rgba(255,255,255,.10),rgba(59,130,246,.12));border:1px solid var(--line);
+  border-radius:18px;padding:24px;backdrop-filter:blur(18px) saturate(140%);
+  box-shadow:0 24px 60px -28px rgba(59,130,246,.65), inset 0 1px 0 rgba(255,255,255,.22);margin-bottom:26px}
+.hero{text-align:center;padding:56px 0 30px}
+.hero h1{font-size:clamp(34px,7vw,64px);margin:10px 0;text-transform:uppercase}
+.neon{color:var(--blue2);text-shadow:0 0 26px rgba(96,165,250,.8)}
+.ip{font-size:12px;letter-spacing:.4em;color:var(--muted);text-transform:uppercase}
+.lead{color:var(--muted);max-width:620px;margin:12px auto 0}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+label{display:block;font-weight:600;margin-bottom:6px}
+input,textarea{width:100%;padding:11px 13px;border-radius:10px;border:1px solid var(--line);
+  background:rgba(255,255,255,.06);color:var(--fg);font-family:inherit;font-size:15px}
+input:focus,textarea:focus{outline:2px solid rgba(96,165,250,.7);outline-offset:1px}
+.grid3{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.hint{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--muted);margin:8px 0}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:11px 13px;margin-bottom:8px;cursor:pointer;font-size:15px}
+.opt:hover{background:rgba(255,255,255,.06)}
+.opt input{width:auto;accent-color:var(--blue2)}
+fieldset{border:0;padding:0;margin:0 0 26px}
+legend{font-size:18px;font-weight:600;margin-bottom:8px}
+.divider{height:1px;background:linear-gradient(135deg,var(--blue2),#818cf8);opacity:.55;margin:14px 0 18px}
+footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var(--muted);font-size:13px}
+.center{text-align:center}
+.hide{display:none}
+.big{font-size:22px;text-transform:uppercase;margin:10px 0}
+.count{text-align:right;font-size:12px;color:var(--muted);margin-top:4px}
 </style>
-
 </head>
 <body>
+<header>
+  <div class="hrow">
+    <div class="brandbox">
+      <img src="logo.png" alt="Logo DZ Complex RP">
+      <div><div class="brand">DZ Complex RP</div><div class="sub">Whitelist Serious RP</div></div>
+    </div>
+    <div class="row" style="margin:0">
+      <a class="btn" href="https://discord.gg/cJpKmJnNuT" target="_blank" rel="noreferrer">Discord</a>
+      <a class="btn primary" href="fivem://connect/192.35.206.54">Connect FiveM</a>
+    </div>
+  </div>
+</header>
 
-<nav>
+<main class="wrap">
+  <section class="hero">
+    <p class="ip">192.35.206.54</p>
+    <h1>DZ Complex <span class="neon">RP</span></h1>
+    <p class="lead">Jaweb 3la les questions dyal RP b jdiya. Ila nja7ti, ghadi ykhrej lik l'link dyal Discord w button dyal connect, w l'staff kayjih ping f channel <span class="neon">#accepted</span>.</p>
+    <div class="row">
+      <button class="btn" id="copyIp" type="button">Copy IP</button>
+      <a class="btn primary" href="#form">Bda l'candidature</a>
+    </div>
+  </section>
 
-<div class="logo">
-DZ COMPLEX
-</div>
+  <section class="panel hide center" id="result"></section>
 
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">Rules</a></li>
-<li><a href="#">Whitelist</a></li>
-<li><a href="#">Staff</a></li>
-<li><a href="#">News</a></li>
-</ul>
+  <form id="form" novalidate>
+    <section class="panel">
+      <h2>1. M3lomat dyalek</h2><div class="divider"></div>
+      <div class="grid3">
+        <div><label for="discord">Discord (username)</label><input id="discord" required maxlength="60" placeholder="karim_rp"></div>
+        <div><label for="ic">Smiya IC (character)</label><input id="ic" required maxlength="60" placeholder="Karim Belhaj"></div>
+        <div><label for="age">L3omr</label><input id="age" type="number" required min="13" max="99" placeholder="18"></div>
+      </div>
+    </section>
 
-</nav>
+    <section class="panel">
+      <h2>2. Questions RP</h2>
+      <p class="sub">Koll question 3andha mital bch tfhem. Khtar jwab wa7ed.</p>
+      <div class="divider"></div>
+      <div id="mcq"></div>
+    </section>
 
-<div class="hero">
+    <section class="panel">
+      <h2>3. RP mektoub</h2><div class="divider"></div>
+      <div id="open"></div>
+    </section>
 
-<div class="card">
+    <div class="center">
+      <button class="btn primary" type="submit" id="send" style="padding:14px 28px;font-size:17px">Sift l'candidature</button>
+      <p class="sub" style="margin-top:10px">Ba3d ma tsift, l'staff kaychouf f Discord.</p>
+    </div>
+  </form>
+</main>
 
-<img src="assets/images/logo.png">
+<footer>DZ Complex RP — 192.35.206.54 · <a href="https://discord.gg/cJpKmJnNuT">Discord</a></footer>
 
-<h1>DZ COMPLEX ROLEPLAY</h1>
+<script>
+/* ====== BDEL HNA: hott l'webhook dyal channel #accepted ======
+   Discord > Server Settings > Integrations > Webhooks > Copy Webhook URL   */
+const DISCORD_WEBHOOK_URL = "PUT_YOUR_DISCORD_WEBHOOK_URL_HERE";
+const SERVER_IP = "192.35.206.54";
+const DISCORD_INVITE = "https://discord.gg/cJpKmJnNuT";
 
-<p>
-The Ultimate Algerian FiveM Roleplay Experience
-</p>
+const MCQ = [
+ {id:"rp_meta",q:"Chno hiya « Metagaming » f RP ?",correct:0,
+  hint:"Mital: chefti f stream fin kayn l'voleur mn ba3d dazti nichan 3lih = metagaming (memnou3).",
+  o:["Tst3mel m3lomat men barra l'RP (Discord, stream, TeamSpeak) f l'jeu","Tl3b m3a friends dyalek f nafs l'organisation","Tdxol f mission b weapon lourd","Tbdel character dyalek koll nhar"]},
+ {id:"rp_powergaming",q:"Chno hiya « Powergaming » ?",correct:1,
+  hint:"Mital: /me kanchedd rassou w kanksser yeddih w kanserqou telephone — bla ma tkhelli l'khor y3aksk = powergaming.",
+  o:["Tl3b b character 3andou histoire qwiya","Tforce action 3la l'khor bla ma t3tih forsa yjaweb","Tchri dar ghalya f l'jeu","T3mel job legal ghir 8 sa3at"]},
+ {id:"rp_vdm",q:"Chno hiya « VDM » ?",correct:1,
+  hint:"Mital: tdkhol b Sultan w tdrbe 10 players f l'place bla ay scenario = VDM (ban direct).",
+  o:["Tsog b vitesse 3adia f centre ville","Tqtel wla tdreb nass b tomobila bla sabab RP","Tbi3 tomobila l' player khor","Tkhelli tomobila f garage"]},
+ {id:"rp_fearrp",q:"« Fear RP » : ki tkon 3andek pistolet 3la rassek, chno l'khedma s7i7a ?",correct:1,
+  hint:"Mital: 3andek 3 nas b armes m3ak — t3ti yeddik w tl3b l'peur, machi tl3b Rambo.",
+  o:["Tkhrej weapon w tbda tyri","Tkhaf 3la 7ayat character dyalek w tem cha ma qalou lik","Tdisconnect mn server","Tktb f chat « admin help » w tjri"]}
+];
+const OPEN = [
+ {id:"background",label:"Histoire (background) dyal character dyalek",min:120,
+  example:"Mital: « Karim Belhaj, 27 3am, wlid Casablanca, ja l'Los Santos ba3d ma tsedd l'garage dyal bouh. Kaykhdem mecano nhar w kayssaleh tomobilat msrouqa lila... »"},
+ {id:"scenario",label:"Scenario RP: kayn accident f l'route w nta l'wl li wsel — chno kat3mel ?",min:120,
+  example:"Mital: « /me kanwqef tomobila 3la jenb w kanchdd les feux de detresse. /do yeddi kayrjfou. Kan3ayt l'EMS w kanbqa m3ah... »"},
+ {id:"why",label:"3lach bghit tdxol l'server dyalna ?",min:60,
+  example:"Mital: « Bghit RP serieux, 3andi 2 snin experience, w bghit nbni business legal (garage)... »"}
+];
 
-<div class="buttons">
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+document.getElementById("mcq").innerHTML = MCQ.map((q,i)=>`
+ <fieldset><legend>${i+1}. ${esc(q.q)}</legend>
+ <div class="hint">${esc(q.hint)}</div>
+ ${q.o.map((o,j)=>`<label class="opt"><input type="radio" name="${q.id}" value="${j}"><span>${esc(o)}</span></label>`).join("")}
+ </fieldset>`).join("");
 
-<a class="btn blue" href="fivem://connect/192.35.205.54">
-🎮 CONNECT
-</a>
+document.getElementById("open").innerHTML = OPEN.map(q=>`
+ <div style="margin-bottom:22px">
+  <label for="${q.id}">${esc(q.label)}</label>
+  <div class="hint">${esc(q.example)}</div>
+  <textarea id="${q.id}" rows="5" maxlength="4000" placeholder="Ktb hna b tafsil..."></textarea>
+  <div class="count"><span id="c_${q.id}">0</span>/${q.min} 7erf minimum</div>
+ </div>`).join("");
+OPEN.forEach(q=>{
+  const t=document.getElementById(q.id);
+  t.addEventListener("input",()=>{document.getElementById("c_"+q.id).textContent=t.value.trim().length;});
+});
 
-<a class="btn glass" href="https://discord.gg/cJpKmJnNuT" target="_blank">
-💬 DISCORD
-</a>
+document.getElementById("copyIp").onclick=()=>{navigator.clipboard.writeText(SERVER_IP);alert("IP tcopya: "+SERVER_IP);};
 
-<a class="btn glass" href="whitelist.html">
-📝 WHITELIST
-</a>
+document.getElementById("form").addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const discord=document.getElementById("discord").value.trim();
+  const ic=document.getElementById("ic").value.trim();
+  const age=parseInt(document.getElementById("age").value,10);
+  if(discord.length<2||ic.length<3||!(age>=13&&age<=99)){alert("Kemmel m3lomat dyalek (Discord, smiya IC, l3omr 13+).");return;}
+  const mcqAns={};
+  for(const q of MCQ){
+    const el=document.querySelector(`input[name="${q.id}"]:checked`);
+    if(!el){alert("Jaweb 3la ga3 les questions RP.");return;}
+    mcqAns[q.id]=parseInt(el.value,10);
+  }
+  const wrong=MCQ.filter(q=>mcqAns[q.id]!==q.correct);
+  const tooShort=OPEN.filter(q=>document.getElementById(q.id).value.trim().length<q.min);
+  const accepted = wrong.length===0 && tooShort.length===0;
+  const score = MCQ.length - wrong.length;
 
-</div>
+  const btn=document.getElementById("send"); btn.disabled=true; btn.textContent="Kansiftou...";
+  if(DISCORD_WEBHOOK_URL.startsWith("https://")){
+    try{
+      await fetch(DISCORD_WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({username:"DZ Complex RP — Whitelist",embeds:[{
+          title: accepted ? "✅ ACCEPTED — Whitelist" : "❌ REFUSED — Whitelist",
+          color: accepted ? 0x3b82f6 : 0xef4444,
+          fields:[
+            {name:"Discord",value:discord,inline:true},
+            {name:"Smiya IC",value:ic,inline:true},
+            {name:"L3omr",value:String(age),inline:true},
+            {name:"Score RP",value:score+"/"+MCQ.length,inline:true},
+            ...OPEN.map(q=>({name:q.label,value:(document.getElementById(q.id).value.trim()||"—").slice(0,1000)}))
+          ],
+          timestamp:new Date().toISOString()
+        }]})});
+    }catch(err){console.error(err);}
+  }
+  btn.disabled=false; btn.textContent="Sift l'candidature";
 
-</div>
-
-</div>
-
-<section>
-
-<h2 class="title">
-Why Choose DZ Complex?
-</h2>
-
-<div class="features">
-
-<div class="feature">
-<h3>🚓 Realistic RP</h3>
-<p>Professional roleplay experience with custom jobs and economy.</p>
-</div>
-
-<div class="feature">
-<h3>🚗 Custom Vehicles</h3>
-<p>Large collection of optimized vehicles and exclusive content.</p>
-</div>
-
-<div class="feature">
-<h3>🏠 Housing</h3>
-<p>Own apartments, houses and garages across the city.</p>
-</div>
-
-<div class="feature">
-<h3>🎉 Events</h3>
-<p>Weekly events, giveaways and community activities.</p>
-</div>
-
-</div>
-
-</section>
-
-<footer>
-
-© 2026 DZ COMPLEX ROLEPLAY
-
-</footer>
-
+  const r=document.getElementById("result"); r.classList.remove("hide");
+  r.innerHTML = accepted
+   ? `<h2 class="big neon">Mabrouk, nja7ti!</h2>
+      <p class="sub">Score: ${score}/${MCQ.length}. L'candidature dyalek tsiftat l channel <b>#accepted</b>.</p>
+      <div class="row"><a class="btn primary" href="fivem://connect/${SERVER_IP}">Connect FiveM</a>
+      <a class="btn" href="${DISCORD_INVITE}" target="_blank" rel="noreferrer">Dxol l Discord</a></div>
+      <p class="brand" style="letter-spacing:.3em;margin-top:14px">${SERVER_IP}</p>`
+   : `<h2 class="big">Machi daba, 3awd jarreb</h2>
+      <p class="sub">Score questions RP: ${score}/${MCQ.length}.${tooShort.length?" Jwabat qsira bzaf: "+tooShort.map(q=>esc(q.label)).join(", ")+".":""}</p>`;
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+</script>
 </body>
 </html>
