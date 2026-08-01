@@ -117,7 +117,7 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
     </section>
 
     <div class="center">
-      <button class="btn primary" type="submit" id="send" style="padding:14px 28px;font-size:17px">Sift l'candidature</button>
+      <button class="btn primary" type="submit" id="send" style="padding:14px 28px;font-size:17px">ارسال طلب الانضمام</button>
       <p class="sub" style="margin-top:10px">Ba3d ma tsift, l'staff kaychouf f Discord.</p>
     </div>
   </form>
@@ -128,7 +128,7 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
 <script>
 /* ====== BDEL HNA: hott l'webhook dyal channel #accepted ======
    Discord > Server Settings > Integrations > Webhooks > Copy Webhook URL   */
-const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1533035973250908220/lnTeSmxtE6R7NeS1YRIQ14XIVFOWGFNBTvPbs1pGeeRIMJFBL40k_8Yj63gfHgxzkz1A";
+const DISCORD_WEBHOOK_URL = "PUT_YOUR_DISCORD_WEBHOOK_URL_HERE";
 const SERVER_IP = "192.35.206.54";
 const DISCORD_INVITE = "https://discord.gg/cJpKmJnNuT";
 
@@ -211,7 +211,7 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
         }]})});
     }catch(err){console.error(err);}
   }
-  btn.disabled=false; btn.textContent="Sift l'candidature";
+  btn.disabled=false; btn.textContent="ارسال طلب الانضمام";
 
   const r=document.getElementById("result"); r.classList.remove("hide");
   r.innerHTML = accepted
