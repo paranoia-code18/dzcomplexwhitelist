@@ -226,7 +226,7 @@ document.getElementById("steamLink").addEventListener("keydown", e=>{
 /* Discord login */
 document.getElementById("discordLogin").addEventListener("click", ()=>{
   if(DISCORD_CLIENT_ID){
-    const redirect = encodeURIComponent("https://dzcomplex.de"/);
+    const redirect = encodeURIComponent(location.origin + location.pathname);
     location.href = "https://discord.com/oauth2/authorize?client_id=" + DISCORD_CLIENT_ID +
       "&response_type=token&scope=identify&redirect_uri=" + redirect;
     return;
