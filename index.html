@@ -85,7 +85,7 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
   <section class="hero">
     <p class="ip">192.35.206.54</p>
     <h1>DZ Complex <span class="neon">RP</span></h1>
-    <p class="lead">Jaweb 3la les questions dyal RP b jdiya. Ila nja7ti, ghadi ykhrej lik l'link dyal Discord w button dyal connect, w l'staff kayjih ping f channel <span class="neon">#accepted</span>.</p>
+    <p class="lead">Please answer the Roleplay questions carefully. If you pass the whitelist exam, the Discord invite link and the server connect button will be unlocked. The staff team will also receive a notification in the designated Discord channel <span class="neon">#accepted</span>.</p>
     <div class="row">
       <button class="btn" id="copyIp" type="button">Copy IP</button>
       <a class="btn primary" href="#form">Bda l'candidature</a>
@@ -96,11 +96,11 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
 
   <form id="form" novalidate>
     <section class="panel">
-      <h2>1. M3lomat dyalek</h2><div class="divider"></div>
+      <h2>1. معلومات شخصيتك</h2><div class="divider"></div>
       <div class="grid3">
         <div><label for="discord">Discord (username)</label><input id="discord" required maxlength="60" placeholder="karim_rp"></div>
-        <div><label for="ic">Smiya IC (character)</label><input id="ic" required maxlength="60" placeholder="Karim Belhaj"></div>
-        <div><label for="age">L3omr</label><input id="age" type="number" required min="13" max="99" placeholder="18"></div>
+        <div><label for="ic">اسم شخصيتك</label><input id="ic" required maxlength="60" placeholder="Karim Belhaj"></div>
+        <div><label for="age">Age</label><input id="age" type="number" required min="13" max="99" placeholder="18"></div>
       </div>
     </section>
 
@@ -112,7 +112,7 @@ footer{border-top:1px solid var(--line);padding:24px;text-align:center;color:var
     </section>
 
     <section class="panel">
-      <h2>3. RP mektoub</h2><div class="divider"></div>
+      <h2>3. RP HISTOIRE</h2><div class="divider"></div>
       <div id="open"></div>
     </section>
 
@@ -133,25 +133,25 @@ const SERVER_IP = "192.35.206.54";
 const DISCORD_INVITE = "https://discord.gg/cJpKmJnNuT";
 
 const MCQ = [
- {id:"rp_meta",q:"Chno hiya « Metagaming » f RP ?",correct:0,
+ {id:"rp_meta",q:"ما هي « Metagaming » f RP ?",correct:0,
   hint:"Mital: chefti f stream fin kayn l'voleur mn ba3d dazti nichan 3lih = metagaming (memnou3).",
-  o:["Tst3mel m3lomat men barra l'RP (Discord, stream, TeamSpeak) f l'jeu","Tl3b m3a friends dyalek f nafs l'organisation","Tdxol f mission b weapon lourd","Tbdel character dyalek koll nhar"]},
- {id:"rp_powergaming",q:"Chno hiya « Powergaming » ?",correct:1,
+  o:["تستعمل معلومات من خارخ الرولبلاي  (Discord, stream, TeamSpeak)","تلعب مع اصدقائك في نفس السيناريو","تدخل في سيناريو بالاسلحة ثقيلة","تستبدل شخصيتك كل يوم"]},
+ {id:"rp_powergaming",q:"ما هي « Powergaming » ?",correct:1,
   hint:"Mital: /me kanchedd rassou w kanksser yeddih w kanserqou telephone — bla ma tkhelli l'khor y3aksk = powergaming.",
-  o:["Tl3b b character 3andou histoire qwiya","Tforce action 3la l'khor bla ma t3tih forsa yjaweb","Tchri dar ghalya f l'jeu","T3mel job legal ghir 8 sa3at"]},
- {id:"rp_vdm",q:"Chno hiya « VDM » ?",correct:1,
+  o:["تلعب بالشخصية عندها قصة حقيقية","تجبر على اللاعبين بدون اعطائهم فرصة على الجواب","شراء منزل باهض الثمن ","تخدم في وظيفة قنونية لمدة 8 ساعات"]},
+ {id:"rp_vdm",q:"ما هي « VDM » ?",correct:1,
   hint:"Mital: tdkhol b Sultan w tdrbe 10 players f l'place bla ay scenario = VDM (ban direct).",
-  o:["Tsog b vitesse 3adia f centre ville","Tqtel wla tdreb nass b tomobila bla sabab RP","Tbi3 tomobila l' player khor","Tkhelli tomobila f garage"]},
- {id:"rp_fearrp",q:"« Fear RP » : ki tkon 3andek pistolet 3la rassek, chno l'khedma s7i7a ?",correct:1,
+  o:["تقود السيارة بالسرعة عادية وسط المدينة","تقتل اللاعبين بدون سبب ","تبيع سيارتك للاعب اخر","تدخل سيارتك داخل الحضيرة"]},
+ {id:"rp_fearrp",q:"ما هو « Fear RP » : عندما يرفع احدهم السلاح عليك ما هو عليك فعله",correct:1,
   hint:"Mital: 3andek 3 nas b armes m3ak — t3ti yeddik w tl3b l'peur, machi tl3b Rambo.",
-  o:["Tkhrej weapon w tbda tyri","Tkhaf 3la 7ayat character dyalek w tem cha ma qalou lik","Tdisconnect mn server","Tktb f chat « admin help » w tjri"]}
+  o:["ترخج سلاحك و تبدء في اطلاق الرصاص","تخاف على حياتك و تطبق ما قالو لك","تفصل من السيرفر","تكتب /report"]}
 ];
 const OPEN = [
- {id:"background",label:"Histoire (background) dyal character dyalek",min:120,
-  example:"Mital: « Karim Belhaj, 27 3am, wlid Casablanca, ja l'Los Santos ba3d ma tsedd l'garage dyal bouh. Kaykhdem mecano nhar w kayssaleh tomobilat msrouqa lila... »"},
- {id:"scenario",label:"Scenario RP: kayn accident f l'route w nta l'wl li wsel — chno kat3mel ?",min:120,
+ {id:"background",label:"قصة شخصيتك",min:120,
+  example:"Mital: «karim ja los santos b3d ma tsra9 l garage nte3 babah yakhdem mechano ysla7 tomobilat masrou9a ..... »"},
+ {id:"scenario",label:"Scenario RP: في حال ماوجدت حادث (accident) و وصلت انت الاول ماذا تفعل  ?",min:120,
   example:"Mital: « /me kanwqef tomobila 3la jenb w kanchdd les feux de detresse. /do yeddi kayrjfou. Kan3ayt l'EMS w kanbqa m3ah... »"},
- {id:"why",label:"3lach bghit tdxol l'server dyalna ?",min:60,
+ {id:"why",label:"لماذا اردت ان تدخل الى سيرفر ?",min:60,
   example:"Mital: « Bghit RP serieux, 3andi 2 snin experience, w bghit nbni business legal (garage)... »"}
 ];
 
@@ -166,7 +166,7 @@ document.getElementById("open").innerHTML = OPEN.map(q=>`
  <div style="margin-bottom:22px">
   <label for="${q.id}">${esc(q.label)}</label>
   <div class="hint">${esc(q.example)}</div>
-  <textarea id="${q.id}" rows="5" maxlength="4000" placeholder="Ktb hna b tafsil..."></textarea>
+  <textarea id="${q.id}" rows="5" maxlength="4000" placeholder="اكتب هنا..."></textarea>
   <div class="count"><span id="c_${q.id}">0</span>/${q.min} 7erf minimum</div>
  </div>`).join("");
 OPEN.forEach(q=>{
@@ -181,7 +181,7 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
   const discord=document.getElementById("discord").value.trim();
   const ic=document.getElementById("ic").value.trim();
   const age=parseInt(document.getElementById("age").value,10);
-  if(discord.length<2||ic.length<3||!(age>=13&&age<=99)){alert("Kemmel m3lomat dyalek (Discord, smiya IC, l3omr 13+).");return;}
+  if(discord.length<2||ic.length<3||!(age>=13&&age<=99)){alert("Kemmel معلومات شخصيتك (Discord, smiya IC, Age 13+).");return;}
   const mcqAns={};
   for(const q of MCQ){
     const el=document.querySelector(`input[name="${q.id}"]:checked`);
@@ -203,7 +203,7 @@ document.getElementById("form").addEventListener("submit", async (e)=>{
           fields:[
             {name:"Discord",value:discord,inline:true},
             {name:"Smiya IC",value:ic,inline:true},
-            {name:"L3omr",value:String(age),inline:true},
+            {name:"Age",value:String(age),inline:true},
             {name:"Score RP",value:score+"/"+MCQ.length,inline:true},
             ...OPEN.map(q=>({name:q.label,value:(document.getElementById(q.id).value.trim()||"—").slice(0,1000)}))
           ],
